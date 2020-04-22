@@ -1,0 +1,61 @@
+TypeScript Variables
+TypeScript DataTypes
+1. Primitive Types
+	a) Number
+	b) Boolean
+	c) String     "" ' ' `string ${ }`
+		\
+	d) undefined
+	e) null
+
+4. undefined type:  Undefined is a type defined for variables that are not configured with a value i.e variable is declared but value not assigned.
+	The keyword undefined is used to verify the value defined or not.
+
+Ex:
+let price:number;
+price = 45000.54;
+if(price==undefined) {
+    console.log("Please Provide Price");
+} else {
+console.log(`Price = ${price}`);
+}
+
+Note: TypeScript supports union of types. A variable can be declared with multiple types.
+	
+       let  variableName:dataType1|dataType2|..;
+
+Ex:
+let price:number|undefined;
+
+if(price==undefined) {
+    console.log("Please Provide Price");
+} else {
+console.log(`Price = ${price}`);
+}
+
+5. null type:  Null is a type that returned when no-reference found for a variable during runtime.
+	     Null is an exception caught at runat when value is not defined for any reference. You can verify by using the keyword "null".
+
+Ex:
+1. Add a new TS file
+	   "nulldemo.ts"
+let username:string|null;
+username = prompt("Your Name");
+if(username=="") {
+    document.write("Please Enter Name - It can't be Empty");
+} else if (username==null) {
+    document.write("You canceled..");
+} else {
+    document.write("Hello ! " + username);
+}
+
+2. compile
+	>tsc nulldemo.ts
+
+3. Add a new HTML file "home.html"
+
+<head>
+    <script src="nulldemo.js"></script>
+</head>
+
+Need a plug-in : Open with browser, Live Server
