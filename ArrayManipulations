@@ -1,0 +1,257 @@
+	          Declaring Array
+	          =============
+- Array is declared by using the meta character "[]" for datatype, which specifies that the variable can handle multiple values.
+	
+Syntax:
+	let  variableName:dataType[];
+
+- Array can be declared to handle similar type of values i.e strongly typed collection of specific data type.
+
+Syntax:
+	let  variableName:string[];
+	let  variableName:number[];
+
+- Array can also be declared to handle various types of values, which is known as "Tuple". 
+
+- Tuple is a collection of various types of values. You can define a Tuple by using "any" type.
+
+Syntax:
+	let variableName:any[];
+
+- Array can also be declared with a union of types i.e a variable can be strongly typed with multiple types of values belongs to different datatype.
+
+Syntax:
+	let variableName:string[] | number[];
+
+
+Note: Array must be initialized with memory in-order to store values.
+
+	 Initialize Memory for Array
+	 =====================
+- Memory for an Array can be initialized by using meta character "[ ]" or  constructor "Array()".
+
+ 	let varName:string[] = [ ];
+	let varName:string[] = new Array();
+
+new → It is dynamic memory allocating operator.
+
+- You also use assigning technique for allocating memory.
+
+Syntax:
+	let varName:string[];
+	varName = [ ];
+
+	             (or)
+
+	 let varName:string[];
+	 varName = new Array();
+
+- If array memory is initialized with meta character "[]" it can have behavior of "Tuple" , when data type is defined as "any" type. [can store various types of values].
+
+     Syntax:
+	let varName:any[] = [10, true , "A"];   // valid
+
+- If array memory is initialized using "Array()" constructor then it will not allow the behavior of "Tuple". i.e you can store only similar type value even when the datatype is defined as "any".
+- The value datatype will be determined and will be fixed according to the first value type.
+
+Syntax:
+        let varName:any[] = new Array(10, "A"); //invalid
+				       only
+				       number
+        let varName:any[] = new Array("A", 10); //invalid
+				       only	
+				       string
+
+
+	    Storing Values into Array
+	    ====================
+- Array is allocated with memory by using 
+	      "[] or Array()"
+
+- Values are stored into Array by using the reference of Array properties.
+
+- Values are accessed from Array by using the properties.
+
+- Usually the properties are string type having the reference of index number.
+
+Syntax:
+	let values:string[] = ["A", "B", "C"];
+	console.log(values["1"]);     // B
+	console.log(values[0]);        // A
+
+		      or
+	let values:string[] = [];
+	values["0"] = "A";
+	values[1] = "B";
+
+Ex:
+let products:string[] = [];
+products[0] = "TV";
+products["1"] = "Mobile";
+for(var property in products) {
+    console.log(`${property} - ${(typeof property)} : ${products[property]}`)
+}
+
+Declaring Array
+Initialize Memory
+Storing Values
+Reading Values from Array
+ toString(), join(), find(), filter(), for..in, for..of, for
+
+	     Insert values into Array
+	     ===================
+
+Function		Description
+-------------------------------------------------------------------------
+push()	  Adds a new value into array as last item.
+	  Syntax:
+	   arrayName.push(newValue,....);
+
+unshift()     Adds a new value into array as first item.
+	  Syntax:
+	   arrayName.unshift(newValue,....);
+
+splice()      Adds a new value into array at specified
+	 position.
+
+	 Syntax:
+	 arrayName.splice(indexPositionToAdd, NoOfElementsToRemove, newElements);
+
+Ex: Push / Unshift
+
+let products:string[] = ["TV", "Mobile", "Shoe"];
+function Print() {
+    for(var property in products) {
+      console.log(`[${property}]:${products[property]}`)
+    }
+}
+products.push("Watch");
+products.unshift("Sunglasses");
+Print();
+
+Ex: Splice
+
+let products:string[] = ["TV", "Mobile", "Shoe"];
+function Print() {
+    for(var property in products) {
+        console.log(`[${property}]:${products[property]}`)
+    }
+}
+products.splice(1,0,"Watch", " ", ...);
+Print();
+
+	      "Remove Elements from Array"
+
+Function		Description
+===========================================
+pop()	      It removes the last element from Array.
+shift()	      It removes the first element from Array.
+splice()	      It removes the speicfied elements and
+	      return an array of elements.
+
+Syntax:
+ array.pop();
+ array.shift();
+ array.splice(startIndex, NoOfItemsToRemove)
+
+Note: All array functions that are used to remove elements will return the removed elements.
+
+Ex: Pop() / Shift()
+
+let products:string[] = ["TV", "Mobile", "Shoe"];
+function Print() {
+    for(var property in products) {
+       console.log(`[${property}]:${products[property]}`)
+    }
+}
+console.log("--Actual Values--");
+Print();
+let removedElement:string = products.pop();
+console.log(`${removedElement} -  Removed`);
+Print();
+
+Ex: Splice()
+
+let products:string[] = ["TV", "Mobile", "Shoe"];
+function Print() {
+    for(var property in products) {
+        console.log(`[${property}]:${products[property]}`)
+    }
+}
+console.log("--Actual Values--");
+Print();
+let removedElement:string[] = products.splice(1,2);
+console.log(`${removedElement.toString()} -  Removed`);
+Print();
+
+
+	           "Sorting Array"	
+
+Function		Description
+--------------------------------------------------------------------------
+ sort()	     Arrange the elements of an array in
+	    ascending order.
+
+ reverse()      Arrange the elements of an array in
+	    reverse order. [bottom to top]
+
+Syntax:
+arrayName.sort();
+arrayName.reverse();
+
+Note: Sorting will not change the arrangement of values present in array permanently. It is just applied while reading.
+
+EX:
+let cities:string[] = ["Hyd","Mumbai","Delhi","Chennai","Bangalore"];
+
+function Print() {
+    for(var property in cities) {
+        console.log(`[${property}] : ${cities[property]}`)
+    }
+}
+console.log("--Actual Arrangement--");
+Print();
+console.log("--Sorted Descending--");
+cities.sort();
+cities.reverse();
+Print();
+
+
+	"Searching for any Element in Array"
+	  ============================
+
+Function		Description
+----------------------------------------------------------------------------
+indexOf()	           It can search for specified value in
+	           an array and return its index number
+	           if value found. It returns "-1" if value
+	           not found. [Find first occurance]
+
+lastIndexOf()       It finds the last occurance index
+	           number, if there are duplicate values.
+
+find()	            It finds and returns value based
+	            on given condition. It returns only
+	            first occurance value.
+
+filter()	            It finds and returns all values that
+	            are matching with given condition.
+
+
+Ex:
+
+let cities:string[] = ["Hyd","Mumbai","Goa","Delhi","Chennai","Goa","Bangalore"];
+
+function Print() {
+    for(var property in cities) {
+        console.log(`[${property}] : ${cities[property]}`)
+    }
+}
+Print();
+console.log("---Search Result--");
+let cityName:string = "Goa";
+if(cities.indexOf(cityName)==-1){
+    console.log(`${cityName} Not Found`);
+} else {
+    console.log(`${cityName} found at ${cities.lastIndexOf(cityName)}`);
+}
