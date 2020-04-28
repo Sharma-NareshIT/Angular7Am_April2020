@@ -1,0 +1,110 @@
+	           Concat Array
+- The "concat()" allows to combine 1 or more arrays into single array.
+ 
+Syntax:
+     arrayName.concat(array1, array2,...);
+
+Ex:
+let electronics:string[] = ["TV","Mobile"];
+let footwear:string[] = ["Nike Casuals", "Lee Cooper Boot"];
+let products:string[] = electronics.concat(footwear);
+console.log(products.toString());
+console.log(electronics.toString());
+console.log(footwear.toString());
+
+
+		Slice Array
+The "slice()" allows to extract the elements by specified index range. Slice will not remove elements.
+
+array.slice(n,m);     n - start index
+	               m - end index  
+array.slice(n);         upto the end of array
+
+Ex:
+let products:string[] = ["TV","Mobile","Watch","Nike Shoe"];
+let newProducts:string[] = products.slice(2,4);
+console.log(newProducts.toString());
+
+	              Object Type
+
+- The concept of Object into computer programming was introduced by "Alan Kay" in early 1960's.
+- Object comprises of data and logic.
+- Data is stored in properties.
+- Logic is defined by using functions.
+- Object comprises of related type of data and logic.
+- It separates the data and logic of every module in an application.
+- Typescript provides an Object Type to create and configure object.
+
+Syntax:
+ 	let  name : object = { };
+
+- Data is stored in properties and logic in function.
+
+Syntax:
+	
+let name:object = {
+      property:value,
+      logic: function() {
+      }
+  };
+
+- The members of any object are accesible with-in the object by using "this" keyword.
+
+Syntax:
+        let  name:object = {
+              property:value;
+              method:function() {
+                   this.property;
+              }
+         }
+
+- The members are accessible outside object by using "object" name.
+
+  let  name:object = {
+              property:value;
+              method:function() {
+             
+              }
+         }
+  name.property;
+  name.method();
+
+- The the property values can be assigned with new values. i.e we can override the values stored in TS object properties.
+
+Ex:
+let product:object = {
+    Id:1,
+    Name: "Samsung TV",
+    Price: 45000.53,
+    Qty:2,
+    Total: function() {
+        return this.Qty * this.Price;
+    },
+    Print: function(){
+        console.log(`Id=${this.Id}\nName=${this.Name}\nPrice=${this.Price}\nQuantity=${this.Qty}\nTotal=${this.Total()}`);
+    }
+};
+product.Print();
+console.log(`------------`);
+product.Id=2;
+product.Name="Nike Casuals";
+product.Price= 2300.40;
+product.Print();
+
+	          Regular Expressions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
