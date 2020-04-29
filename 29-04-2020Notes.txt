@@ -1,0 +1,80 @@
+Array	: [ ]
+Object 	: { }
+Array of Objects -  JSON [JavaScript Object Notation]
+
+JSON - is a format used to represent data.
+             It is native to every browser.
+             It can be stored offline and its cross platform.
+
+ Syntax:
+	[
+	  { Property:value, Method:function(){}},
+	  { Property:value, Method:function(){}}
+	]
+
+ To configure JSON type in TypeScript you have to use the datatype "any".
+
+Ex:  Read any Specific value from JSON type
+
+let products:any = [
+    {Name: "Samsung TV", Price:45000.55, Category: "Electronics", InStock: true},
+    {Name: "Nike Casuals", Price:3200.44, Category: "Footwear", InStock: false},
+    {Name: "Mobile", Price: 12000.44, Category: "Electronics", InStock:true}
+];
+console.log("Shoe Price=" + products[1].Price);
+
+Ex: Read all Product Details
+
+let products:any = [
+    {Name: "Samsung TV", Price:45000.55, Category: "Electronics", InStock: true},
+    {Name: "Nike Casuals", Price:3200.44, Category: "Footwear", InStock: false},
+    {Name: "Mobile", Price: 12000.44, Category: "Electronics", InStock:true}
+];
+for(var item of products) {
+    console.log(`${item.Name} - ${item.Price} - ${(item.InStock==true)?'Available':'Out of Stock'}`);
+}
+
+Ex: Read All Electronic Products  [ filter() ]
+
+let products:any = [
+    {Name: "Samsung TV", Price:45000.55, Category: "Electronics", InStock: true},
+    {Name: "Nike Casuals", Price:3200.44, Category: "Footwear", InStock: false},
+    {Name: "Mobile", Price: 12000.44, Category: "Electronics", InStock:true}
+];
+
+function Search(product) {
+    return product.Category=="Footwear";
+}
+
+let results:any[] = products.filter(Search);
+
+for(var item of results) {
+    console.log(`${item.Name} - ${item.Price} - ${item.Category}`);
+}
+
+
+
+EX: Traditional Loop and Condition
+
+for(var i=0; i<products.length; i++) {
+    if(products[i].Category=="Electronics") {
+        console.log(`${products[i].Name}-${products[i].Category}`);
+    }
+}
+
+Ex: Lambda 
+
+let results:any[] = products.filter(x=>x.Category=="Electronics");
+
+for(var item of results) {
+    console.log(item.Name);
+ }
+       
+
+
+
+
+
+
+
+
