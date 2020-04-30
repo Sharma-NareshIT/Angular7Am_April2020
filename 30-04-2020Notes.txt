@@ -1,0 +1,109 @@
+- Adding values into JSON type collection
+	push(), unshift(), splice()
+
+Ex:
+let products:any = [
+    {Name: "Samsung TV", Price:45000.55, Category: "Electronics", InStock: true},
+    {Name: "Nike Casuals", Price:3200.44, Category: "Footwear", InStock: false},
+    {Name: "Mobile", Price: 12000.44, Category: "Electronics", InStock:true}
+];
+let product:any = {
+    Name: "Lee Cooper Boot",
+    Price: 3100.56,
+    Category: "Footwear",
+    InStock: true
+};
+products.push(product);
+products.unshift({Name:"Sunglasses", Price: 5000.55, Category: "Fashion", InStock:true});
+
+for(var item of products) {
+    console.log(`${item.Name} - ${item.Price}`);
+}
+
+	          Non-Primitive Types
+1. Array
+2. Object
+3. JSON 
+4. Date
+
+	                Date Type
+
+- TypeScript doesn't provide any strongly type data type for date.
+- You have to use "any" type to configure and store date value.
+- In order to store date value in memory you have to initialize date type memory by using "Date()" constructor.
+
+  Syntax:
+	let  dateValue:any = new Date();
+
+  [ By default it loads the current data into memory ]
+
+- If you want to initialized or store any specific date then you have to pass the date value into constructor in a string format "yy-mm-dd".
+
+ Syntax:
+	let dateValue:any = new Date("2020-03-20");
+	let dateValue:any = "2020-03-20"; //string
+
+
+- You can declare and render date value;
+
+Syntax:
+
+let Manufactured:any;
+Manufactured = new Date("2020-01-12");
+
+
+- TypeScript provides a set of date functions to read or manipulate date values. 
+- Every date function returns a number.
+
+Function		Description
+============================================
+getHours()	It returns the hour number in
+		24 hr format.
+
+getMinutes()	It return minutes number.
+
+getSeconds()	It returns seconds number.
+
+getMilliseconds()	It returns milliseconds (0-999)
+
+getDate()		It returns the date number
+		30 [in april]
+
+getDay()		It returns weekday number.
+		0 - Sunday
+		1 - Monday ...
+
+getMonth()	It returns the Month number.
+		0 - January
+
+getTime()		It returns the time value.
+
+getFullYear()	It returns the year number.
+
+getYear()		It returns the year number as
+		per Y2K. [no-recomended]
+		[119 = 2019, 120=2020, 100=2000]
+		
+
+toLocaleDateString()  It returns date in short format
+
+toDateString()	  It returns date in long format
+
+toLocaleTimeString()  It returns time in long format
+
+
+Syntax:
+	dateValue.getHours()
+	dateValue.getMonth()
+
+
+Ex:
+let productName:string = "Samsung TV";
+let mfd:any = new Date("2020-01-18");
+
+let months:string[]= ["January","Feb","Mar","Apr"];
+let weekdays:string[] = ["Sunday","Mon","Tue","Web","Thru","Fri","Saturday"];
+
+console.log(`Name=${productName}\nMfd Month=${weekdays[mfd.getDay()]}, ${months[mfd.getMonth()]} ${mfd.getDate()}, ${mfd.getFullYear()}`);
+
+
