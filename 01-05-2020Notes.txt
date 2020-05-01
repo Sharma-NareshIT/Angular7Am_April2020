@@ -1,0 +1,122 @@
+	     Regular Expression Type
+- A regular expression is a pattern used to verify the format of input value.
+- A pattern is built by using meta characters and quantifiers.
+         <input type="text" pattern="regExp">
+- A regular expression is a combination of meta characters and quantifiers enclosed in "/ /"
+- In TypeScript "any" type is used to store a regular expression.
+
+Syntax:
+       let  regExpression:any = /pattern/;
+
+- Input value is compared with regular expression by using "match()". It is a boolean function that return true when value is matching with regular expression.
+
+	if(value.match(regExp)) {
+	     // if true
+	}
+
+                     
+
+
+Meta Character	Description
+---------------------------------------------------------------------------
+?		zero or one occurance
++		one or more occurances
+*		zero or more occurances
+\		To define any individual entity
+
+w		It is an entity to allow uppercase,
+		lowercase alphabet with numeric
+		and underscore.
+		[A-Za-z0-9_]
+
+d		Only numeric [0-9] allowed
+
+s		Blank space allowed
+
+\^		Starts with
+
+$		Ends with
+
+[A-Z]		Only uppercase allowed
+
+[a-z]		Only lowercase allowed
+
+[a-Z] or [a-zA-Z]      Both upper and lowercase allowed
+
+[0-9]		Only numeric allowed
+
+[a-zA-Z0-9]	Alpha numeric allowed
+
+[a,d,s]		Only specified chars allowed
+
+[^a,d,s]		Excluding specified chars all
+		others allowed.
+
+[a-mA-M4-9]	Only chars in specified range
+		are allowed.
+
+\+ \. \$  \&		Allow specified special character
+
+[!@#$%&]		Allow all special chars defined.
+
+(?=.*[A-Z])		Atleast one uppercase letter
+		is mandatory.
+
+(?=.*[0-9])		Atleast one numeric value is
+		mandatory.
+
+(?=.*[a-z])		At least one lowercase letter
+		is mandatory.
+
+(?=.*[!@#$%&])	At least one special char is 
+		mandatory.
+
+
+Ex:
+let word:string = "colour";
+let regExp:any = /colou?r/;
+if(word.match(regExp)) {
+    console.log(`Your Spelling ${word} is correct`);
+} else {
+    console.log(`${word} Invalid-You can enter only color or colour - case sensitive`);
+}
+
+Quantifier		Description
+---------------------------------------------------------------------------
+ {n}	Exactly n-number of chars allowed
+ {n,m}	Minimum-n and Maximum-m
+ {n, }	Minimum-n and Maximum-any
+
+ {4}	- Exactly 4 chars 
+ {4,10}	- between 4 to 10
+ {4, }	- Min 4 and Max any number
+
+Ex:
+let mobile:string = "+919876543210";
+let regExp:any = /\+91[0-9]{10}/;
+if(mobile.match(regExp)) {
+    console.log(`Your Mobile ${mobile} Verified Successfully..`);
+} else {
+    console.log(`${mobile} - Invalid Mobile- +91 and 10 digits required`);
+}
+
+Ex:
+let password:string = "john12A";
+let regExp:any = /(?=.*[A-Z])\w{4,10}/;
+if(password.match(regExp)) {
+    console.log(`${password} - Strong Password`);
+} else {
+    if(password.length<4) {
+        console.log(`${password} - Poor Password`);
+    } else {
+        console.log(`${password} - Weak Password`);
+    }
+}
+
+
+
+
+
+
+
+
