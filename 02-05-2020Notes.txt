@@ -1,0 +1,73 @@
+
+	         Type assertions 
+	         ==============
+- Type assertions are a way to tell the compiler that we know exactly with what type of data we are dealing with.
+- A type assertion is like type cast in other language.
+- It is the process of making the compile understand about the data types by converting the type.
+- There are two method of handling type assertions
+	a) by using "angle-bracket" < >
+	b) by using "as" keyword
+
+Ex:
+let msg:any = "Welcome to TypeScript";
+let count:number = (<string>msg).length;
+console.log(`Total No of Chars ${count}`);
+
+Ex:
+let msg:any = "Welcome to TypeScript Language";
+let count:number = (msg as string).length;
+console.log(`Total No of Chars ${count}`);
+
+Note: Several Middleware frameworks can understand "as". Hence it is the most commonly used technique for TypeAssertions.
+
+
+
+Summary:
+1. Root Type is "any"
+2. Primitive Types
+	number, boolean, string, null, undefined
+3. Non Primitive Types
+	Array, object, date, regularExpression
+4. Union of Types
+5. Type Assertions
+
+	             Operators 
+- Operator is an object in computer programming.
+- It uses values from operands and returns a value.
+- Based on how many operands an operator can handle, they are classified into 
+	a) Unary Operator [one operand]
+		x++, --x
+	b) Binary Operator
+		x+y  x*y
+	c) Ternary Operator
+		(condition)?true:false
+- Based on what type of value an operator returns, they are again classified into following types.
+
+1. Arithmetic Operators
+2. Comparison (Relational) Operators
+3. Bitwise Operators
+4. Logical Operators
+5. Assignment Operators
+6. Special Operators
+
+	           Special Operators
+	           --------------------------
+1. Ternary Operator  [ ?: ]
+    It is similar to a simple "if..else" condition. It evaluates a value if condition is true and another value if condition is false.
+
+ Syntax:
+	(condition)?value_if_true:value_if_false
+
+2. typeof : It is a special operator used to return the data type of value stored in a reference.
+
+Ex:
+let product:any = {
+    Name: "TV",
+    Price: 45000.53,
+    IsInStock:true,
+    Quantity:2,
+    Total: function() {
+        this.Quantity * this.Price
+    }
+}
+console.log(`Name is ${(typeof product.Name)}\nPrice is ${(typeof product.Price)}\nInStock is ${typeof product.IsInStock}\nQuantity is ${(typeof product.Quantity)}\nTotal is ${typeof product.Total}`);
