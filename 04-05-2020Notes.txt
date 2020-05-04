@@ -1,0 +1,125 @@
+Special Operators
+1. Ternary Operator [?:]
+2. typeof operator
+3. instanceof : It is a special operator used to check whether the given object is derived from specific class. It returns boolean true when the object belongs to specific class.
+
+Syntax:
+	object instanceof class;   // true/false
+
+Ex:
+class Employee {
+
+}
+let emp = new Employee();
+let products = new Array();
+
+console.log(`emp is Employee Type : ${emp instanceof Employee}\n emp is Array Type : ${emp instanceof Array}\n products is Employee Type : ${products instanceof Employee}\n products is Array Type : ${products instanceof Array}`);
+
+O/P:
+ emp is Employee Type : true
+ emp is Array Type : false
+ products is Employee Type : false
+ products is Array Type : true
+
+4. delete operator:  It is a special type of operator used to delete any property from an object.
+
+Syntax:
+	delete  objectName.propertyName;
+
+Note: You can't delete readonly properties. All built-in objects and their properties are readonly i.e like Array, String, Math, navigator, history, location, date etc..'
+
+	delete Math.PI;    // invalid - it is readonly
+
+Ex:
+let product:any = {
+    Name: "Samsung TV",
+    Price: 45000.55
+};
+delete product.Price;
+if(product.Price==undefined) {
+    console.log(`Name=${product.Name}`);
+} else {
+console.log(`Name=${product.Name}\nPrice=${product.Price}`);
+}
+
+5. in operator: It verifies whether the given property is available in specified object and returns boolen true or false.
+
+Syntax:
+	'PropertyName'  in  ObjectName;
+
+Ex:
+let product:any = {
+    Name: "Samsung TV",
+    Price: 45000.55
+};
+delete product.Price;
+console.log(`Is Price Available in Product ? ${'Price' in product}`);
+
+6. new operator:   It is a special type of operator is used to allocate memory dynamically for a specific class. So that the members of the class are loaded into memory.
+
+   Syntax:
+	let  products = new Array();
+	let  now = new Date();
+	let emp = new Employee();
+
+7. void operator: It is used to define that the object or function doesn't return a value or functionality.
+
+Syntax:
+<a>Home</a>	// invalid - bug in testing
+		   not implemented 
+		   [no href defined]
+
+<a href=""> Home </a>    // invalid 
+	                           no-redirection implemented
+
+<a href="#"> Home </a>  // invalid
+		           requires an Id   [ #id ]
+		           
+<a href="javascript:void(0)"> // valid
+
+
+Ex:
+<body>
+    <h2>Void Demo</h2>
+    <a href="javascript:void(document.body.style.backgroundColor='yellow')">Home</a>
+</body>
+
+
+Ex:
+<body>
+    <h2>Void Demo</h2>
+    <a href="javascript:void(location.href='../home.html')"> Home</a>
+</body>
+
+1. Variables
+2. DataTypes
+3. Operators
+4. Statements
+
+		Statements
+- A statement in computer programming is used to control the executing flow.
+- The statements are classified into following type
+
+Statement Type		Keywords
+===========================================
+Selection Statements    if, else, switch, case, default
+Iteration & looping	     for, while, do while,
+		     for..in, for..of
+Jump		     return, break, continue
+Exception Handling	     try, catch, throw, finally
+
+
+	     Object Orientend Programming
+
+
+
+
+
+
+
+
+
+
+
+
+
