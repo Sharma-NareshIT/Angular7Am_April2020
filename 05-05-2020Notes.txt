@@ -1,0 +1,77 @@
+		TypeScript
+	   Object Oriented Programming
+
+- Computer Programming Systems which are commonly used in real-world application development are classified into 3 major types.
+	a) POPS
+	b) OBPS
+	c) OOPS
+
+POPS: 
+- Process Oriented Programming System
+- It supports low level features
+- It can directly interact with hardware services.
+- It uses very less memory
+- It is faster
+	Ex: C, PASCAL, COBOL etc..
+- Code re-usability and separation issues
+- extensibility issues
+- no dynamic memory allocations
+
+OBPS:
+- Object Based Programming System
+- Supports Code-reusability
+- Dynamic Memory allocations
+- Supports code - separation
+
+   Ex: Visual Basic, JavaScript [now supports OOPS]
+
+- Extensibility issues
+- Not support dynamic poly morphism
+- no Inheritence
+
+	JavaScript - Brendan Eich - MDN
+
+OOP
+- Object Oriented Programming System
+- The concept of "Object" into computer programming was introduced in early 1960's by 
+ "Alan Kay".
+- Object comprises of data and logic
+- In early 1967  "Johan Olay & Kristian Nyaggard"
+- The first OOP was formulated with a language called
+	"SIMULA 67"
+- OOP Introduced Code Re-usability
+- Later in 1970's "Trygve" introduced a new Framework which supports code separation. The framewor was named as "MVC". [Model View Controller].
+- MVC was first formulated with "Small Talk"
+- 1975  C++
+- 1990  Java
+
+Features of OOP:
+1. Code Reusability
+2. Code Separation
+3. Code Extensibility
+4. Mantainability and Testability
+5. Loosely Coupled architecture 
+6. Code Security
+
+DrawBacks of OOP:
+1. Legacy library
+2. Complex in configurations
+3. Uses more memory
+4. Slow
+5. Can't directly interact with hardware services.
+
+Characterstics of OOPS:
+1. Class
+2. Object
+3. Inheritence
+4. Polymorphism
+5. Abstraction
+6. Encapsulation
+
+
+         *TypeScript is completely OOP Language*
+
+
+
+
+
