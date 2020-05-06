@@ -1,0 +1,74 @@
+	              TypeScript OOP 
+
+Contracts in OOP:
+- A Contract defines set of rules for designing any component.
+- Contracts are designed in OOP by using "Interface".
+- Every rule defined in a contract is by default mandatory to implement. 
+- How ever you can define optional rules in a contract.
+- Contracts are defined in TypeScript by using "interface".
+	
+Syntax:
+	interface  interfaceName
+	{
+	   // members;
+	}
+
+- Contract defines members which are by default public in access. Hence you should not define any access modifier for member in contract.
+
+- Contract comprises of methods and properties.
+- Properties are used to store data
+- Method are used to define logic
+- Contract can contain only declaration of members.
+- Contract can't have assigment and implementation of members.
+- Method can't have definition.
+- Properties can't be defined with value.
+
+	interface  name {
+	      username:string = "John";  // invalid
+                        username:string;      // valid
+	      Print():void { };           // invalid
+	      Print():void;               // valid	      
+	}
+
+Ex:
+interface IProduct 
+{
+    Name:string;
+    Price:number;
+    InStock:boolean;
+    Print():void;
+}
+let tv:IProduct = {
+    Name:"Samsung TV",
+    Price: 34000.44,
+    InStock: true,
+    Print():void {
+       console.log(`Name=${this.Name}\nPrice=${this.Price}\nStock=${(this.InStock==true)?"Available":"Out of Stock"}`);
+    }
+}
+tv.Print();
+Optional Rules
+=============
+
+- Contract can be defined with optional rules i.e a property or method can be configured as optional.
+
+- Typescript uses "?" as a null reference character, which specifies that the property or method can be ignored.
+
+Syntax:
+interface IProduct 
+{
+    Name:string;
+    Price:number;
+    InStock:boolean;
+    Quantity?:number;          // optional
+    Print():void;
+}
+let tv:IProduct = {
+    Name:"Samsung TV",
+    Price: 34000.44,
+    InStock: true,
+    Print():void {
+       console.log(`Name=${this.Name}\nPrice=${this.Price}\nStock=${(this.InStock==true)?"Available":"Out of Stock"}`);
+    }
+}
+tv.Print();
