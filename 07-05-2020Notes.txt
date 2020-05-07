@@ -1,0 +1,107 @@
+- Contracts in OOP
+- Interfaces
+- Rules
+- Optional Rules [ ? ] null reference character.
+		
+	     Extending Contracts
+- Contract can be cleanly separated with the members organized according to their behavior.
+- You extend existing contract by creating a new contract and using the keyword "extends" to extend and add new rules for existing contract.
+
+Syntax:
+     interface ExistingContract
+     {
+     }
+     interface  NewContract extends ExistingContract
+     {
+     }
+     let obj : NewContract = {
+     }
+
+- The NewContract is configured with all members from ExistingContract. i.e it is extended.
+
+- You have to implement all the existing and new contract member.
+
+- Existing Contract is technically known as Super contract.
+
+- Newly Create Contract in known as Derived contract.
+
+Ex:
+interface IProductProperties 
+{
+    Name:string;
+    Price:number;
+    Qty:number;
+}
+interface IProductMethods extends IProductProperties
+{
+    Total():number;
+    Print():void;
+}
+let tv:IProductMethods = {
+    Name: "Samsung TV",
+    Price: 34000.42,
+    Qty: 2,
+    Total():number {
+        return this.Qty * this.Price;
+    },
+    Print():void {
+        console.log(`Name=${this.Name}\nPrice=${this.Price}\nQuantity=${this.Qty}\nTotal=${this.Total()}`);
+    }
+}
+tv.Print();
+
+- A Contract supports multi level extensibility and multiple extensibility.
+
+- Multiple Extensibility allow one contract to extend more than one existing contracts by using multiple hierarchy.
+
+Syntax:
+  interface DerivedContract extends Super1, Super2
+  {
+  }
+
+Ex: Multiple
+
+interface IModel {
+    ModelName:string;
+}
+interface IMemory {
+    Memory:string;
+}
+interface ICamera {
+    Camera:string;
+}
+interface IMobile extends IModel, IMemory, ICamera
+{
+    Print():void;
+}
+let samsung:IMobile = {
+    ModelName: "J8",
+    Memory: "6GB RAM",
+    Camera: "20pixels",
+    Print():void {
+        console.log(`Samsung ${this.ModelName}\nRAM=${this.Memory}\nCamera=${this.Camera}`);
+    }
+}
+samsung.Print();
+
+- Multilevel extensibility is restricting a contract to extend only one contract, however the extended contract can be extended again.
+
+Ex:
+interface IAngular2 
+{
+    Language:string;
+}
+interface IAngular4 extends IAngular2
+{
+    Framework:string;
+}
+interface IAngular9 extends IAngular4
+{
+    Ivy:string;
+}
+let angular:IAngular9 = {
+    Language:"TypeScript Language",
+    Framework:"Cordova Framework",
+    Ivy: "Ivy Rendering Engine"
+};
+console.log(`Angular 9 Features:\n${angular.Language}\n${angular.Framework}\n${angular.Ivy}`);
