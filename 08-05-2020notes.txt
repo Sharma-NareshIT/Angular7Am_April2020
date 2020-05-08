@@ -1,0 +1,115 @@
+ReadOnly members in a Contract:
+- Every member in a contract can be re-defined with new value any number of times.
+
+interface IProduct 
+{
+    Name:string;
+    Price:number;
+}
+let tv:IProduct = {
+    Name: "TV",
+    Price: 45000.55
+};
+tv.Name = "Samsung TV";	// valid
+console.log(`Name=${tv.Name}\n Price=${tv.Price}`);
+
+- You prevent re-defining of values or definition for any member in a contract by marking it with "readonly".
+
+Ex:
+interface IProduct 
+{
+    readonly Name:string;
+    Price:number;
+}
+let tv:IProduct = {
+    Name: "TV",		// valid
+    Price: 45000.55
+};
+tv.Name = "Samsung TV";	// invalid
+console.log(`Name=${tv.Name}\n Price=${tv.Price}`);
+
+Intexable Properties in a Contract
+============================
+- Usually the properties in a contract are accessible by using their reference name.
+- You can configure Indexable properties so that they can be accessed by using an memory index.
+- It is regularly used to define a collection of values such as Array.
+- Indexable properties requires to be defined with a Key and value.
+- Both key and value can have different types.
+
+Syntax:
+	interface  Collection
+	{
+	  [key:number] : string;
+	}
+
+	Key - number type
+	Value - String type
+
+ You can access the value with reference of keys, which are by default memory index 0, 1 etc...
+
+Ex:
+interface CustomArray
+{
+    [index:number]:string;
+}
+let products: CustomArray = ["TV", "Mobile"];
+let product1 = products[0];
+let product2 = products[1];
+console.log(`${product1}\n${product2}`);
+
+
+Summary :
+- What is a Contract?
+- How to define contracts?
+- What are rules in a Contract?
+- How to define optional Rules in a contract?
+- How to define readonly rules in a contract?
+- How to define indexable properties in a contract?
+- How to extend contracts.
+
+Ex: Importing contracts from external file.
+ a) Every contract is accessible within the specified file. In order to access from another file you have to mark it as "export".
+	Syntax:
+	   export interface Name {
+	   }
+
+ b) Import the contract from exteral file and implement in your application
+
+    Syntax:
+            import  { ContractName } from '../Filepath';
+
+1. Create folder
+	"ShoppingApp"
+2. Create sub folders
+	- Contracts
+	- Main
+3. Add following files into Contracts folder
+	IProduct.ts
+export interface IProduct 
+{
+    Name:string;
+    Price:number;
+}
+	ICategory.ts
+export interface ICategory
+{
+    CategoryId:number;
+    CategoryName:string;
+}
+
+4. Goto Main folder and add a new file
+		"app.ts"
+import { IProduct } from '../Contracts/IProduct';
+import { ICategory } from '../Contracts/ICategory';
+
+let tv:IProduct|ICategory = {
+    Name: "Samsung TV",
+    Price: 40000.42,
+    CategoryName: "Electronics"
+}
+console.log(`Name=${tv.Name}\nPrice=${tv.Price}\nCategory=${tv.CategoryName}`);
+
+
+
+
+
