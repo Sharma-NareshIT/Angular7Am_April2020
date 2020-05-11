@@ -1,0 +1,91 @@
+	             Members of Class
+- Class is a program template
+- It is an entity with data and logic
+- It is a model or blue print for creating of objects.
+- A  class in TypeScript comprises 3 members
+	a) Properties
+	b) Functions
+	c) Constructor
+- Properties are used to store data
+- Functions are used to define functionality or logic
+
+	let  x = 10;
+	public x = 10;
+
+FAQ: What is difference between Variable and Property?
+A. Variable will not have any accessor [get  / set]
+    Property will have accessor which can provide 
+    authorized access to member in a class.
+
+FAQ: What is difference between Function and Method?
+A.    Functions always intended to return a value.
+       Methods are not intended to return value.
+       Procedure may or maynot return a value.
+
+- JavaScript or TypeScript comprises of only Functions, which have the behavior of a procedure.
+
+ Syntax:
+	class className
+	{
+	   // constructor
+	   // functions
+	   // properties
+	}
+
+Constructor in TypeScript Class:
+- It is a special type of function in class, which performs a call back.
+- A callback function can execute automatically if the situation matches.
+- Any functionality that you want as a callback for class, then you have to define it in a constructor.
+- Constructor is an anonymous function. i.e function without any name.
+- The class name is given to the constructor.
+- Explicitly you can't define a name for constructor.
+- TypeScript constructor is created by using the keyword  "constructor"
+
+Ex:
+class Database
+{
+  constructor() {
+      console.log("Connected to Database Successfully");
+  }
+   public Insert():void{
+       console.log("Record Inserted");
+   }
+}
+let oracle = new Database;
+oracle.Insert();
+
+- Constructor can be parameterized.
+- Parameters are passed into constructor while allocating memory for class.
+
+Ex:
+class Database
+{
+  constructor(dbName:string) {
+      console.log(`Connected to ${dbName} Successfully`);
+  }
+   public Insert():void{
+       console.log("Record Inserted");
+   }
+}
+let oracle = new Database("Oracle");
+oracle.Insert();
+let mysql = new Database("MySql");
+mysql.Insert();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
