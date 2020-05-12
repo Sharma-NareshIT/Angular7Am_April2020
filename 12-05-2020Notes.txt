@@ -1,0 +1,112 @@
+ReadOnly Modifier
+- You can make properties of a class as readonly by using "readonly" keyword.
+- Readonly properties must be initialized at their declaration or in the constructor.
+
+Ex:
+class Demo {
+    public readonly uname = "John";
+}
+let obj = new Demo();
+console.log(`Hello ! ${obj.uname}`);
+
+		Accessors
+- TypeScript supports getters/setters as a way of intercepting access to a members of a class.
+- Accessors allow to define authorized access to any members.
+- Accessort give a finer-grained control over the member and its accessibility.
+- You can restrict get and set of values according to the state of application.
+
+
+    get   Name() {
+        return value;
+    }
+    set   Name(newValue) {
+            oldvalue = newValue;
+     }
+
+- get and set accessors are public in access.
+
+Ex:
+let password:string = "admin123";
+
+class Product {
+    private _productName: string;
+
+    get ProductName(): string {
+        return this._productName;
+    }
+
+    set ProductName(newName: string) {
+        if(password && password == "admin123"){
+            this._productName = newName;
+        } else {
+            console.log("Invaid Password: Not Authorized to Change Product");
+        }
+    }
+}
+let tv = new Product();
+tv.ProductName = "Samsung TV";
+if(tv.ProductName) {
+    console.log(`Name= ${tv.ProductName}`)
+}
+
+	       Functions in a Class
+- Function defines logic for handling specific functionality.
+- A function may or may not return value.
+- It have the behavior of a Procedure.
+
+    a) Function	: always returns a value
+    b) Method	: will not return a value
+    c) Procedure	: May or May not return value.
+
+- Functions outside the class are defined by using "function" keyword.
+
+	function name() {
+	}
+
+- Functions inside the class are defined by using an access modifier and reference name with return type.
+
+	public name() : returnDataType {
+	}
+
+Ex:
+function hello():string {
+    return "Hello ! TypeScript";
+}
+class Demo {
+    public Print():void {
+        console.log(hello());
+    }
+}
+let obj = new Demo;
+obj.Print();
+
+Anonymous Function:
+- A function without name is known as Anonymous function.
+- Anonymous function are mostly used on callback mechanism.
+- Anonymous function can be loaded into memory and a memory reference can be used to access the value or functionality returned by function.
+
+     let  f1 = function() { };
+     f1();
+
+Ex:
+let hello = function(){
+    return "Hello ! TypeScript OOP";
+}
+class Demo {
+    public Print():void {
+        console.log(hello());
+    }
+}
+let obj = new Demo;
+obj.Print();
+
+Note: Class can't have anonymous function directly.
+
+
+
+
+
+
+
+
+
