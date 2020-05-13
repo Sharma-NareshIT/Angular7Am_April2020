@@ -1,0 +1,138 @@
+
+	       Function Parameters 
+- A Function uses parameters in order to modify the functionality.
+- The parameters defined in function signature are known as "Formal Parameters".
+- The parameters  defined in function call are know as "Actual Parameters".
+
+  Syntax:
+               function  Print(param1)  → Formal Parameter
+	{
+	}
+                Print(10); → Actual Parameter
+
+- Every formal parameter is by default mandatory.
+- You can define parameter as optional by using "Null" reference character.
+
+Syntax: Optional Parameter
+	function Print(param?:Type) {
+	}
+
+Ex:
+function PrintNumbers(count:number) {
+   for(var i=1; i<=count; i++) {
+       console.log(i);
+   }
+}
+class Demo {
+    public Print(){
+        PrintNumbers(5);
+        PrintNumbers(3);
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+- Function can be defined with multiple parameters.
+
+Ex:
+function PrintProduct(Name:string, Price:number) {
+   console.log(`Name=${Name}\nPrice=${Price}`);
+}
+class Demo {
+    public Print(){
+       PrintProduct("TV", 45000.55);
+       PrintProduct("Mobile", 12000.43);
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+Note:  If the function is defined with optional parameter then we have to verify undefined.
+
+Ex:
+function PrintProduct(Name:string, Price?:number) {
+    if(Price==undefined) {
+        console.log(`Name=${Name}`);
+    } else {
+    console.log(`Name=${Name}\nPrice=${Price}`);
+    }
+}
+class Demo {
+    public Print(){
+       PrintProduct("TV", 45000.55);
+       console.log(`---------------`);
+       PrintProduct("Mobile", 12000.43);
+       console.log(`---------------`);
+       PrintProduct("Shoe");
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+- The parameters that you define in a function signature have order dependency.
+- You have to pass the parameters in the same order as they are defined in formal list.
+- A required parameter cannot follow an optional parameter.
+
+Syntax:
+  function Print(Name?:string, Price:number)  //invalid
+      {
+      }
+
+ Optional Parameter [?] means undefined.
+ If you don't define any value for parameter then it is taken as undefined.
+
+Ex:
+function PrintProduct(Name?:string, Price?:number) {
+  if(Name==undefined) {
+    console.log(`Price=${Price}`);
+  } else if(Price==undefined) {
+    console.log(`Name=${Name}`);
+  } else {
+    console.log(`Name=${Name}\nPrice=${Price}`);
+  }
+}
+class Demo {
+    public Print(){
+        PrintProduct("Samsung TV");
+        console.log(`------------`);
+        PrintProduct(undefined, 40000.22);
+        console.log(`------------`);
+        PrintProduct("Samsung TV", 45000.44);
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+- Function can be defined with Array type parameter
+
+Ex:
+function PrintCollection(list:string[]) {
+   for(var item of list) {
+       console.log(item);
+   }
+}
+class Demo {
+    public Print() {
+        PrintCollection(["TV","Mobile"]);
+        PrintCollection(new Array("Shoe","Watch"));
+        let categories:string[] = ["Electronics","Shoes"];
+        PrintCollection(categories);
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+- There can be multiple Array parameters in a function.
+Syntax:
+       function Print(list1:string[], list2:number[]) {
+
+       }
+- There can be other parameters along with Array Parameter.
+
+Syntax:
+       function Print(list1:string[], count:number) {
+
+       }
+
+- Array parameter can be at any position in Formal List. i.e first, last etc..
+
