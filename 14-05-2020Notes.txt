@@ -1,0 +1,95 @@
+Functions - Parameters
+
+Rest Parameters:
+- Rest parameters are new into javascript from ES5
+- Rest parameter allows to pass multiple actual values into single formal parameter.
+- Rest parameter is defined by using "...paramName".
+- Every function can be defined with only one Rest parameter.
+ 
+       function(...param1, ...param2) {        // invalid
+        }
+
+- You can use other parameters with rest parameter but, the Rest parameter must be the last parameter in formal list.
+
+      function(...param1, count) {            //invalid
+
+      }
+
+      function(count, ...param1) {          // valid
+ 
+      }
+
+
+Ex:
+function PrintCollection(count:number, ...list:string[]) {
+    for(var item of list) {
+        console.log(item);
+    }
+    console.log("Total Count : " + count);
+}
+class Demo {
+    public Print(){
+        PrintCollection(3,"TV","Mobile","Watch")
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+	        Function Return Types
+- Function can be defined to return a value.
+- Function is defined with a functionality, which includes evaluation of any expression and handing a logic. The result of expression and the logic that derived any output must be stored in a reference and return as response.
+- You have to create a reference for storing the values evaluated by expressions in a function.
+- A function is defined with return type in order to use the function as a reference for storing values.
+
+	var : dataType 
+	function():dataType
+
+- If we don't want a function to be used as a reference for storing the values then you can define it as "void".
+
+- A function which is intended to store value must be defiend with a datatype and values can be stored using "return" keyword.
+
+              function name():datatype  {
+	 return value;
+              }
+
+Ex:
+function Captcha():string {
+    let a:number = Math.random() * 10;
+    let b:number = Math.random() * 10;
+    let c:number = Math.random() * 10;
+    let d:number = Math.random() * 10;
+    let e:number = Math.random() * 10;
+    return `${Math.round(a)} ${Math.round(b)} ${Math.round(c)} ${Math.round(d)} ${Math.round(e)}`;
+}
+class Demo {
+    public Print() {
+        console.log(`Code: ${Captcha()}`);
+    }
+}
+let obj = new Demo();
+obj.Print();
+obj.Print();
+obj.Print();
+obj.Print();
+
+
+FAQ: Can a void type function use "return" keyword?
+A. Yes.   return is a jump statement, it can be used in any function to terminate the compilation. The code written after the "return" statement is not reachable to compiler.
+
+function Sample():void {
+    console.log("statement-1");
+    console.log("statement-2");
+    return;
+    console.log("statement-3");    
+}
+class Demo {
+    public Print() {
+        Sample();
+    }
+}
+let obj = new Demo();
+obj.Print()
+
+
+
+
