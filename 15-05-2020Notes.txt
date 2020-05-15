@@ -1,0 +1,98 @@
+Function Constructor:
+==================
+- Typescript provides "Function()" constructor, which allows to build a function dynamically.
+
+Syntax:
+   var ref = new Function("...args");
+
+Ex:
+var add = new Function("a","b","return a + b");
+
+class Demo {
+    public Print() {
+        console.log("Addition=" + add(10,30));
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+
+Function Recursion:
+=================
+- Recursion is a technique where a function is called with in the context of same function and execute repeatedly until the condition is satisfied.
+- Recursions are used in Batch operations.
+
+Ex:
+function fact(number) {
+    if(number<=0) {
+        return 1;
+    } else {
+        return (number*fact(number-1));
+    }
+}
+class Demo {
+    public Print() {
+        console.log("Factorial=" + fact(5));
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+	           Lambda Function
+	           ==============
+- Lambda referes to anonymous functions defined in a short hand method.
+- Lambda is used mostly in Minifying the code.
+	             min.js
+	             min.css
+- Lambda functions are also known as Arrow functions.
+- Lambda representation comprises of 3 parts
+	a) Parameters
+	b) Fat Array notation / Lambda notation
+	c) Statements
+
+Syntax:
+          (params)=> statement;
+          (params)=> { };
+           params=> statement;
+
+Ex:
+var hello = ()=>"Hello TypeScript";
+var add  = (a,b)=>a+b;
+var display = x=> {console.log("x=" + x)}
+
+class Demo {
+    public Print() {
+        console.log(hello());
+        console.log("Addition=" + add(20,20));
+        console.log(display(30));
+    }
+}
+let obj = new Demo();
+obj.Print();
+
+	          Function Overload
+- To enable overloading of functions in javascript or typescript you have declared the overload without definition. And later implement the overloads.
+- Function overload signature must be void type.
+
+
+Ex:
+function demo(s:string):void;
+function demo(s:string, n:number):void;
+
+function demo(x:any, y?:any):void {
+    console.log(x);
+    if(y!=undefined) {
+        console.log(y);
+    }
+}
+demo("John");
+demo("John", 30);
+
+
+
+
+
+
+
+
+
