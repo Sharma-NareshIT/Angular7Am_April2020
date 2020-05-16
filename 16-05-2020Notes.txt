@@ -1,0 +1,115 @@
+	            Code Reusability
+	            --------------------------
+- It is one of the key feature of OOP.
+- It is a technique that allows to re-use the code written in one entity in another entity [class].
+- You can re-use the members of one class in another class.
+- In OOP you implement reusability by using
+	a) Aggregation
+	b) Inheritence
+
+Aggregation: 
+- It is a technique that uses object-to-object communication.
+- It uses a mechnism called "Has-A-Relation"
+- In this technique without creating any relationship between classes we access the members of one class in another.
+
+Ex:
+class Super {
+    public Print(){
+        console.log("Super Class Print Method");
+    }
+}
+class Derived {
+    public Print(){
+        let obj = new Super();
+        obj.Print();   //super print method
+        console.log("Derived Class Print Method");
+    }
+}
+let obj = new Derived();
+obj.Print();
+
+Inheritence:
+- It is the technique of extending a class.
+- It configures a relationship between classes.
+- The existing class is know as "Super class"
+- The newly created class that extends existing class is known as "Derived" class.
+- The members of super class are accessible to derived class just by using "super" keyword.
+- Without creating an object you can access the members of super class in derived class.
+- This type of relationship is know as
+	"Is-A-Relation"
+- You can extend classes by using the keyword "extends".
+
+ EX:
+class Super {
+    public Print(){
+        console.log("Super Class Print Method");
+    }
+}
+class Derived extends Super {
+    public Print(){
+        super.Print();
+        console.log("Derived Class Print Method");
+    }
+}
+let obj = new Derived();
+obj.Print();
+
+- Inheritence allows to extend a class.
+- In general inheritence can be implemented with 3 major types	
+	a) Single 
+	b) Multiple 
+	c) Multi Level
+
+- Classes are supported with only 
+	a) Single Inheritence
+	b) Multi Level Inheritence
+- Classes are not supported with Multiple Inheritence
+- Interfaces are supported with Multiple Inheritence
+
+Single Inheritence:
+- One Derived class can extend only one Super class.
+
+Syntax:
+	class derived extends super1 {
+	}
+
+Multiple Inheritence:
+- One Derived class can extend multiple super classes, which not possible in terms of classes.
+- It is possible only for Interfaces.
+
+Syntax:
+	class derived extends super1, super2
+	{
+	}    //invalid
+
+	interface derived extends super1, super
+	{
+	}   // valid
+
+FAQ: Why multiple inheritence is not supported for classes?
+A. Because of Constructor Deadlocks.
+
+
+Note: In inheritence implementation when you create an object for dervied class, first the constructor of super class is called then followed by derived class constructor.
+
+- Constructors for derived classes must contain a 'super' call.
+- Super class constructor is called by using
+	"super()"
+
+Ex:
+class SuperClass
+{
+  constructor() {
+      console.log("Super Class Constructor");
+  }
+}
+class DerivedClass extends SuperClass
+{ 
+  constructor() {
+      super();
+      console.log("Derived Class Constructor");
+  }
+}
+let obj = new DerivedClass();
+
+
