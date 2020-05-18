@@ -1,0 +1,66 @@
+What is Multiple Inheritence?
+Why Multiple Inheritence is not supported for classes?
+
+Note: A derived class in typescript must call super class constructor. You can't call the derived class constructor without calling super class constructor.
+
+MultiLevel Inheritence:
+- It allows extensibility for derived class.
+- A derived class can be extended by another class.
+- It represents a multi level hierarchy.
+
+Ex:
+class Version1 {
+    Parameters:string = "Rest Parameters";
+}
+class Version2 extends Version1 {
+    Functions:string = "Anonymous Functions";
+}
+class Version3 extends Version2 {
+    Collections:string = "Enumerations";
+}
+class TypeScript extends Version3 {
+    Version:string = "TypeScript 3.8";
+}
+let typescript = new TypeScript();
+console.log(`Language : ${typescript.Version} \n Features : \n ${typescript.Parameters} \n ${typescript.Functions} \n ${typescript.Collections}`);
+
+
+
+FAQ: How to call a super class constructor in derived class?
+A.  By using "super()"
+
+
+Other OOP Languages:
+
+ SuperClass  object = new DerivedClass(); // valid
+ DerivedClass object = new SuperClass();  // invalid
+
+TypeScript:
+  let   obj:SuperClass = new DerivedClass(); //valid
+  let   obj:DerviedClass = new SuperClass(); //valid
+
+ - TypeScript derived class have a call for super class constructor.
+
+Note: Multiple inheritence type implementation is supported in classes. A single typescript class can implement multiple contracts.
+          Multiple inheritence is not supported in extensibility of classes but supported for implementation of classes.
+
+EX:
+class Version1 {
+    public Parameters:string;
+}
+class Version2 {
+    public Functions:string;
+}
+class TypeScript implements Version1, Version2 {
+    public Parameters:string = "Rest Parameters";
+    public Functions:string = "Anonymous Functions";
+}
+let typescript = new TypeScript();
+console.log(typescript.Parameters + "\n" + typescript.Functions);
+
+Note: In above example classes are used as contracts for creating a new component.
+
+
+FAQ: Why you are using a class as contract instead of Interface?
+A. This type of technique is mostly followed in Template mechanism. [Abstract Classes].
+
