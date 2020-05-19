@@ -1,0 +1,64 @@
+	              Polymorphism
+- The term Poly means Many and Morphos is Forms.
+- Polymorphism allows any component to have different behaviors to handle various situations.
+
+FAQ: How to configure polymorphism?
+A:  By allocating various types of memory for single component.
+
+- Polymorphism is allocating multiple derived classes memory to a single base class object.
+
+- Polymorphism is a process where single base class object uses the memory of multiple derived classes.
+
+Ex:
+class Employee {
+    public FirstName:string;
+    public LastName:string;
+    public Designation:string;
+    public Print():void {
+        console.log(`${this.FirstName} ${this.LastName} - ${this.Designation}`);
+    }
+}
+class Developer extends Employee {
+    public Print():void {
+        super.FirstName = "Raj";
+        super.LastName = "Kumar";
+        super.Designation = ".NET Developer";
+        super.Print();
+    }
+}
+class Consultant extends Employee {
+    public Print():void {
+        super.FirstName = "Kiran";
+        super.LastName = "Rao";
+        super.Designation = "Java Consultant";
+        super.Print();
+    }
+}
+class Manager extends Employee {
+    public Print():void {
+        super.FirstName = "Tom";
+        super.LastName = "Hanks";
+        super.Designation = "Manager";
+        super.Print();
+    }
+}
+let employees:Employee[] = [new Developer(), new Consultant(), new Manager()];
+for(var employee of employees) {
+    employee.Print();
+}
+
+Task:
+1. Create single method that can accept parameters and can be parameter less.
+
+	Method() { printing message } 
+	Method(a,b) { addition of a,b }
+
+2. Create single method that can handle all mathematical operations like add, sub, mul, div.
+
+   You can pass parameters and operation type.
+
+        Method(10,20, add) ; 
+        Method(10,3, mul) ;   
+
+	            Abstraction
+
