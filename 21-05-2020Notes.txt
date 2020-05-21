@@ -1,0 +1,36 @@
+		Generics
+- Generic refers to "TypeSafe".
+- The datatype initially not known to compiler, when a value is provided according to the value type it can fix the data type for any reference and make it strongly typed.
+- TypeScript can use Generics for properties, methods and classes.
+
+Ex:
+function PrintValue<type>(arg:type):type {
+   return arg;
+}
+class Demo {
+    public Print() {
+       console.log(PrintValue<string>("Hello ! Generics"));
+       console.log(PrintValue<number>(10));
+    }
+}
+
+- You can't handle any operators directly on Generic type. you need functions to handle operations.
+
+- A Class can be defined as Generic type. So that the type of properties can defined while allocating memory for object.
+
+Syntax:
+class Product<T>{
+   public price: T;
+   public Name:string;
+}
+let obj = new Product<string>();
+obj.price = "34000.43";
+obj.Name = "TV";
+let obj1 = new Product<number>();
+obj1.price = 34000.54;
+obj1.Name = "Mobile";
+
+		Enums
+modules
+namespace
+
