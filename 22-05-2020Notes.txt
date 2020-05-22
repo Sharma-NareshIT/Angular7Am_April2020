@@ -1,0 +1,105 @@
+		Enums
+- Enum is a collection of named constants.
+- Enums are used to store and access a set of numeric or string constants.
+- Enums allow to acess any value just by using a reference name like object.
+- The keyword "enum" is used to create an Enum, which is an Enumeration.
+- Enum can dynamically configure its value based on existing values.
+
+Syntax:
+	enum EnumName {
+	    Name = value,	
+	}
+	EnumName.Name;
+
+Ex:
+enum ErrorCodes
+{
+    OK = 200,
+    Created = 201,
+    Accepted = 202,
+    NonAuthoritative= 203,
+    NoContent
+}
+console.log(`NoContent Status Code ${ErrorCodes.NoContent} `);    // 204
+
+- If first value is not initialized then it automatically configures the value as 0. However the other value will be defined as they are initialized or based on previous value.
+
+Ex:
+enum ErrorCodes
+{
+    OK,
+    Created = 201,
+    Accepted = 202,
+    NonAuthoritative= 203,
+    NoContent
+}
+console.log(`NoContent Status Code ${ErrorCodes.NoContent} `);               // 204
+console.log(`Ok ${ErrorCode.Ok`);     // 0
+
+Note: Enum can initialize values dynamically only for numeric type constants. 
+
+- Enum can be a collection of string constants.
+- All string constants must be initialized with a value.
+- Enum can't dynamically configure values if they are string type.
+- Enum configures a numeric value for string constants if it is defined as starting index value.
+- Enum can contain collection of both string and numeric constants.
+
+Ex:
+enum Database
+{
+  Last,
+  Next = "Next Record",
+  Prev = "Previous Record",
+  First = "First Record",
+}
+console.log(`Last Value ${Database.Last}`); // 0
+console.log(`Next = ${Database.Next}`); //Next Record
+
+- Enum values can''t be re-defined as they are configure as constants.
+
+        Database.Last = 20;        // invalid
+
+- Can we declare enum with "const" as access specifier?
+A. Yes. Const Enumes are used to configure enums with expressions.
+
+Ex:
+const enum Expressions {
+   A = 2,
+   B = A + 2,
+   C = B * A
+}
+console.log(`A=${Expressions.A} B=${Expressions.B} C=${Expressions.C}`);
+
+- What is Ambient Enum?
+A. All enums are by defined Non-Ambient enums. All are constants and have initializer.
+    Ambinet enum refers to non-constant values in a collection. They doesn't have initializer.
+
+Ex:
+enum ErrorCode {
+    NotFound = 404,
+    TimeOut,
+    MethodNotAllowed = 405
+}
+console.log(`Timeout = ${ErrorCode.TimeOut}`);
+console.log(`Not Allowed = ${ErrorCode.MethodNotAllowed}`);
+
+ TimeOut = 405,
+  Not Allowed = 405
+
+What is Enum Reverse Mapping?
+- It is a technique used to access the name of enum constant based on its value.
+
+Ex:
+enum ErrorCode {
+    NotFound=404
+}
+let a = ErrorCode.NotFound;
+console.log(`a=${a}`);
+let statusText = ErrorCode[a];
+console.log(`Text=${statusText}`);
+
+		
+
+
+
+
