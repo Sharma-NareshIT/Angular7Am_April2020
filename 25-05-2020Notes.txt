@@ -1,0 +1,129 @@
+Generics
+Enums
+
+FAQ's:
+1. What is the purpose of Generic Type?
+- typesafe
+2. What is the purpose of Enum?
+- constants
+3. What is Type Inference?
+- When the data type is not defined for variable explicitly then type script will defined the type according to the value initialized, which is known as 
+ "Type Inference".
+
+ Syntax:
+	let x = 10;     // Type Inference - number
+
+4. What is Type Compatibility?
+- In typescript type compatibility is based on structrual subtyping.
+
+Syntax:
+  interface IProduct {
+        Name:string;
+  } 
+  class Product {
+        Name:string
+   }
+  let  obj : IProduct;
+  obj = new Product();
+
+The above technique is valid. TypeScript supports structural sub typing, which identifies the compatbility while allocating memory and assigns value into memory even when the relation is not defined. This is known as "Type Compatibility".
+
+Syntax: Type Compatibility
+
+ let employees:Employee [ ] = [new Developer(), new Consultant(), new Manager()];
+
+
+	             Modules in TypeScript
+- Modules introduced into JavaScript  with ES 5
+- Modules are executed within their own scope and not in the global scope.
+- A module is a collection of variables, functions and classes etc.
+- A module is used to maintain a repository of functions and class for a library.
+- Modules are used to build library.
+- In order to handle modules JavaScript based language uses AMD [Asynchronous Module Distribution] and Common JS system.
+- Module have its own scope. In order to make the members of a module accessible outside the module you have to mark them as export.
+
+          export class className {
+           }
+
+- To implement the module members in any another module you have to "import" the module and classes.
+
+Ex:
+1. Create a new folder by name "Modules"
+2. Add sub folders
+	- Contracts
+	- Templates
+	- Services
+	- App
+3. Controls folder add file
+	         "IProduct.ts"
+export interface IProduct {
+    Name:string;
+    Price:number;
+    Qty:number;
+    Total():number;
+    Print():void;
+}
+4. Templates folder add file
+	"AbstractProduct.ts"
+import { IProduct } from '../Contracts/IProduct';
+
+export abstract class ProductTemplate implements IProduct {
+   public Name:string = '';
+   public Price:number = 0;
+   public Qty:number = 1;
+   public Total():number {
+       return this.Qty * this.Price;
+   }
+   public abstract Print():void;
+}
+
+5. Services folder add file
+	 "ProductService.ts"
+import { ProductTemplate } from '../Templates/AbstractProduct';
+
+export class Product extends ProductTemplate {
+    public Name:string = "";
+    public Price:number = 0;
+    public Qty:number = 1;
+    public Total():number {
+        return this.Qty * this.Price;
+    }
+    public Print():void {
+        console.log(`Name=${this.Name}\nPrice=${this.Price}\nQty=${this.Qty}\nTotal=${this.Total()}`);
+    }
+}
+6. App folder add the file
+	 "ProductApp.ts"
+import { Product } from "../Services/ProductService";
+
+let tv = new Product();
+tv.Name = "Samsung TV";
+tv.Price=  45000.55;
+tv.Qty= 2;
+tv.Print();
+
+   > tsc  ProductApp.ts
+   > node ProductApp.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
