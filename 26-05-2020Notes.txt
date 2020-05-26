@@ -1,0 +1,79 @@
+	           Namespaces
+- A namespace in typescript is a collection of sub namespaces and related type of classes or contracts.
+- A namespace encapsulates a set of components, which you can import and access from any application.
+- Namespaces are declared by using "namespace" keyword
+- The members defined in a namespace can imported into any file by using "///<reference>"
+- You have to compile all references included into project by using "tsc --outFile" command
+
+Ex:
+1. Create a new Folder "Namespaces"
+2. Add sub folders
+	- Contracts
+	- Templates
+	- Services
+	- App
+3. Contracts add a file
+	            "ProductContract.ts"
+namespace MyProject {
+   export namespace Contracts {
+    export interface ProductContract {
+        Name:string;
+        Price:number;
+        Qty:number;
+        Total():number;
+        Print():void;
+      }
+   }
+}
+4. Templates → add a new file 
+	       "ProductTemplate.ts"
+
+///<reference path="../Contracts/ProductContract.ts" />
+namespace MyProject {
+    export namespace Templates {
+        export abstract class ProductTemplate implements MyProject.Contracts.ProductContract  {
+            public Name:string = "";
+            public Price:number = 0;
+            public Qty:number = 0;
+            public abstract Total():number;
+            public Print():void {
+                console.log(`Name=${this.Name}\nPrice=${this.Price}\nQty=${this.Qty}\nTotal=${this.Total()}`);
+            }
+        }
+    }
+}
+5. Services → Add a new file
+	       "ProductService.ts"
+///<reference path="../Templates/ProductTemplate.ts" />
+namespace MyProject {
+    export namespace Services {
+        export class ProductService extends MyProject.Templates.ProductTemplate {
+            public Name:string = "Samsung TV";
+            public Price:number = 30000.44;
+            public Qty:number = 2;
+            public Total():number {
+                return this.Qty * this.Price;
+            };
+            public Print():void {
+                console.log(`Name=${this.Name}\nPrice=${this.Price}\nQty=${this.Qty}\nTotal=${this.Total()}`);
+            }
+        }
+    }
+}
+6. App folder → add a new file
+	       "ProductApp.ts"
+///<reference path="../Services/ProductService.ts" />
+
+let prodLibrary = MyProject.Services;  // aliasing of namespace
+let tv = new prodLibrary.ProductService();
+tv.Print();
+console.log(`--------------`);
+let shoe = new prodLibrary.ProductService();
+shoe.Name = "Nike Casuals";
+shoe.Price = 2000.44;
+shoe.Qty =2;
+shoe.Print();
+
+7. Open Terminal and compile app
+	>tsc --outFile  app.js   ProductApp.ts
+                 > node app.js
