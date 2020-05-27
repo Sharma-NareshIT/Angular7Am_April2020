@@ -1,0 +1,35 @@
+		Angular
+- Angular is an open source, cross platform TypeScript based developers platform  introduced by Google and maintained a large community of organizations and developers.
+- A developers platform provides all tools and languages that are required from development to production.
+    [Build, Debugging, Testing, Deploying]
+- Angular supports frameworks like
+	a) Apache Cordova
+	b) Ionic
+	c) NativeScript
+  These are the frameworks used for building cross platform mobile applications.
+
+- Angular supports frameworks like
+	a) MVC
+	b) MVP
+	c) MVVM
+ These are the frameworks used to enable features like loosely coupled and extensible, simplified testing, lazy loading etc..
+
+- Angular is modular and component based.
+- It makes Angular 10x faster than angular js.
+- Angular support differential loading
+   * which can maintain separate library for legacy browsers and modern browsers.
+   * legacy browsers supports HTML 4 and upto ES5
+   * modern browsers support HTML 5 and ES5 , ES6
+- Angular supports IVY - It is an rending engine, which is now a part of Angular from 9 version.
+    * IVY supports dynamic compiling
+    * Change and Run your code
+    * Several operations are resolved at runtime. Hence it reduces the compiles and enable faster startup.
+
+- Install Node JS
+- Install TypeScript
+- Install Angular CLI
+
+	> npm  install -g @angular/cli
+                  > ng --version
+
+
