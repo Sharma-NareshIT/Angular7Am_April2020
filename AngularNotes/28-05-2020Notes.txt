@@ -1,0 +1,75 @@
+Install Angular
+ >npm install -g @angular/cli@latest
+ >ng --version
+
+Upgrade to Latest:
+1. uninstall angular existing version
+    >npm uninstall -g @angular/cli
+    >ng clear cache
+    >ng cache verify
+    >ng update @angular/core  @angular/cli
+
+Creating a new Angular Project:
+==========================
+1. Create a new Folder on your disk
+	C:\AngularProjects
+
+2. Open Your project location in command prompt
+
+3. use the command  "ng new  [appName]"  to create a new angular application.
+
+          C:\AngularProjects>ng new  shoppingApp
+
+          ? Would you like to add Angular routing? (y/N) N
+
+          ?Which stylesheet format would you like to use?
+            > CSS  [choose css]
+
+ This will download all repository for Angular application
+
+4. Open Angular  app in VS Code ["ShoppingApp"]
+
+5. Open Terminal  [Ctrl + ` ]
+
+6. Run the command
+	>ng serve 
+	      (or)
+	>npm start
+7. You application starts on a local live server with  URL
+                 Listening on :
+	http://localhost:4200
+
+
+
+        Angular Application High Level Architecture
+       ------------------------------------------------------------------
+1. Modules	: A module is a collection of various
+		  entities, which include contracts,	
+		  templates, services etc..
+
+2. Injectors	: Injector identifies the dependencies
+		  for the component or service you are
+		  using in application and resposible
+		  for loading all dependencies.
+
+3. Services	: A service is a pre-defined business
+		  logic with a set of factories. Factory
+		  is a collection of functions.
+
+4. Components	: Components are the building blocks
+		 for anuglar application. It comprises
+		 of UI, styles and logic.
+
+5. Templates	: Template is a pre-defined component
+		   that can rolled out across pages.
+
+6. Metadata	: It comprises of information about 		  angular component. [which HTML 		 page, which CSS file or what logic its
+		  is using ]
+
+7. Directives	: It injects a component into application.
+		  It returns markup, it can extend 		  markup and make markup more 		  interactive.
+
+
+
+
+  
