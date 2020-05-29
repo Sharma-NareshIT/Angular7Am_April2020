@@ -1,0 +1,70 @@
+	             Angular Project Structure
+	            =======================
+
+e2e		end-to-end tests for application
+
+node_modules	It comprises of library installed from
+		the package manager NPM. It includes
+		your angular library, bootstrap, 
+		mongodb, middleware etc.
+
+src		Source files for the root-level 
+		application project. what ever you
+		need to build and test current app
+		are defined in "src".
+		[Project Components, Services, Pipes
+		 Images etc..]
+
+.editorconfig	Configuration for code editors. It helps
+		maintain consistent coding styles for 
+		multiple developers working on the
+		same project across various editors
+		and IDE's.
+
+.gitignore		Specifies interntionally untracked  files
+		that Git should ignore.
+
+.angular.json	CLI configuration for all projects in
+		the workspace, it includes configuration
+		options for build, debug, test etc..
+		It comprises of mapping to files and
+		other repository.
+
+browserslist	Configuration about target browsers
+		and Node.js version.
+
+karma.conf.js	Configuration for Karma, which is 
+		a testing framework enabled in your
+		angular project.
+
+package.json	Configures npm package dependencies
+		that are aviable to all projects in the
+		workspace.
+
+package.lock.json	Provides version information for all
+		packages installed into node_modules.
+		[packages meta data]
+
+README.md	Introductionay documentation for
+		the root app. It is a help document.
+
+tsconfig.json	Typescript configuration for projects.
+		 It configures the compiler, output dir
+		etc.. It is for all projects in workspaces.
+
+tsconfig.app.json	It is for only current project.
+
+tsconfig.spec.json	It is for testing of Typescript config.
+
+tslint.json		It is used for defining rules for 		typescript.
+
+Note: Startup is defined from "src/index.html"
+
+
+
+
+
+
+
+
+
