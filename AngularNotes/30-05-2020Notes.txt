@@ -1,0 +1,94 @@
+/Src
+- It is the top level folder provides files for running and testing our application.
+- It contains sub folders that comprises of application source like components, pipes, services etc. and application-specific configuration.
+
+Repository of SRC	          Description
+===============================================
+app/		Contains the componet files in which
+		you application logic and data is 		defined.
+
+assets/		It Comprises of non-dynamic files
+		like images, text, pdf etc..
+
+environments/	Contains build configuration options
+		for development, testing and production 		environments.
+
+favicon.ico	It is favicon for your application in the
+		bookmark.
+
+index.html	It is the startup page for application.
+
+main.ts		The main entry point for your app.
+		 This the location from where the
+		 application starts compiling and
+		 initializes the component required for
+		 application.
+		 [Gets information from AppModule]
+		 It uses "JIT" [Just-in-Time] compiler.
+		 You can also configure  AOT compiler.	
+		 [It is ahead-of-time compiler]
+
+Note: JIT is compile in browser at runtime
+          AOT is compile at build time.
+
+polyfills.ts	It comprises of scripts for browser
+		support.
+
+styles.css		It comprises of global CSS for your
+		application. You can add directly CSS
+		or link any stylesheet.
+
+test.ts		It is the main entry point for unit
+		testing.
+
+
+		    App
+		  ======
+- It comprises of application specific logic.
+- It contains components, services, pipes, routing information etc..
+- Every angular project by default comes with a component
+     	               "app.component"
+- Application always starts with the default component.
+- You can add your own components and configure in startup.
+		
+- Your application needs components, services, pipe, modules etc.. for application logic.
+- You have to import and register every component, service, pipe and module that you want to use in application.
+- Importing , Registering and bootstrapping is defined in 
+
+		"app/app.module.ts"
+- It imports all components, services, modules and pipes from various locations and injects their dependecies into application at build and run time.
+
+- You have register your components and services and pipes
+  in "NgModule()"
+
+Syntax:
+
+@NgModule({
+  declarations: [
+        // your component and pipes are registered here..
+  ],
+  imports: [
+      // your modules are registered here..
+  ],
+  providers: [
+     // your services are registered here..
+  ],
+  bootstrap: [
+      // It specifies the startup component..
+  ]
+})
+
+Note: Bootstrapping is the process of converting static DOM
+          into Dynamic DOM.
+          You have to define the startup component in Bootstrap           of "NgModule".
+          It should map to the selector in "index.html".
+
+
+Ex:
+	bootstrap [ AppComponent ]
+	
+	index.html  
+	              <app-root> </app-root>
+
+	          Angular Components
+
