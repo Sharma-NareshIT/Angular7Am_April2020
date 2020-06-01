@@ -1,0 +1,130 @@
+	           Angular Components
+- Components are building-blocks for Angular Application.
+- A Component in Angular provides an UI from where user can interact with our application.
+- A component is a template for UI, which comprises of
+	a) Presentation in HTML
+	b) Styles in CSS
+	c) Logic in TypeScript [JavaScript]
+
+- A Component can be designed by using 2 Techniques
+	a) Code Behind
+	b) Inline Documentation
+
+Code Behind: [UI, Style and Logic are cleanly separated]
+===============================================
+- Presentation is design in "HTML Page" [.html]
+- Styles are defined in StyleSheet  [.css]
+- Logic is defined in TypeScript  [.ts]
+
+Inline Technique: [UI , Styles and Logic all are in one File]
+================================================
+- It comprises of a TypeScript file where you can define the markup (HTML), styles [CSS] and Logic [TypeScript].
+
+
+- Component is technically a TypeScript "Class" that is derived from "Component" base class defined in "@angular/core" library
+
+- All properties and methods for a component are derived from Component Base.
+
+- "Component" directive contains metadata i.e information about a component.
+
+- Every component is configured by using "@Component()" directive, which defines the details about markup, styles and logic.
+
+- The members of Component directive are:
+
+Option		Description
+============================================
+template		It specifies the markup to be rendered.
+		Template is used to defined inline 
+		markup.
+
+templateUrl	It specifies the markup from external
+		file.
+
+styles		It specifies the style attributes for
+		HTML elements. The styles are defined
+		inline.
+
+styleUrls		It specifies the styles from external
+		style sheet.
+
+
+selector		It specifies the name for component.
+		You have to use the selector to access
+		the component from any page.
+
+Syntax:
+import { Component } from '@angular/core';
+
+@Component({
+   selector: ' ' ,
+   template: ' ',
+   styles: [ ] 
+})
+export class DemoComponent {
+
+}
+
+Inline technique:
+===============
+* In this technique Presentation, Styles and Logic all are defined in one file i,e ".ts" file.
+* Everything is managed in one file, then it will reduce the number of requests made to component.
+* If number of requests are reduced then it will improve the load time.
+* Reusability Concerns
+* Extensibility Concern
+* Hard to Test
+
+
+Creating a new Component for Angular Project using Inline Technique:
+
+1. Goto "src/app" folder
+2. Add a new TypeScript file by name
+	"contact.component.ts"
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-contact',
+    template: `
+     <h2>{{title}}</h2>
+     <address> 
+         {{address}}
+     </address>
+     <div> 
+         &copy; Copyright 2020 Amazon
+     </div>
+    `,
+    styles: ['h2{color:green}', 'address{border:2px solid darkcyan; padding:20px}']
+})
+
+export class ContactComponent {
+   public title = 'Amazon Shopping';
+   public address = 'Amazon Ltd. | Hyderabad | 500073';
+}
+
+3. Goto "app.module.ts" and register your component.
+
+  import { ContactComponent } from './contact.component';
+
+  declarations: [
+    .......
+    ContactComponent
+  ],
+
+4. Bootstrap your component in "app.module.ts"
+
+   bootstrap: [ContactComponent]
+
+5. Define your component in "index.html" [src - folder ]
+
+<body>
+  <app-contact></app-contact>
+</body>
+
+Note: {{ }} is angular data binding expression.
+
+
+
+
+
+
+
