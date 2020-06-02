@@ -1,0 +1,123 @@
+Adding Component using Code Behind Technique
+=========================================
+- The UI will be in HTML file
+- The Styles will be in CSS file
+- The Logic will be in TS file
+- Easy to Extend
+- Easy for Unit Testing
+- Separation of Logic and UI
+- Using separate files will increase the number of requests and also the load time.
+
+1. Goto "app" folder and add a new Subfolder by name
+	               "login"
+2. Add following files into login folder
+	- login.component.ts
+	- login.component.html
+	- login.component.css
+
+3. Goto "login.component.ts"
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-login',
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
+})
+
+export class LoginComponent {
+    public title = 'User Login';
+}
+
+4. Goto "login.component.html"
+
+<div class="container">
+    <h2>{{title}}</h2>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text"></dd>
+        <dt>Password</dt>
+        <dd><input type="password"></dd>
+    </dl>
+    <button>Login</button>
+</div>
+
+
+5. Goto "login.component.css"
+
+.container {
+    width: 300px;
+    padding:20px;
+    margin:auto;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    border:2px solid darkcyan;
+    box-shadow: 2px 2px 3px darkcyan;
+    border-radius: 10px;
+}
+button {
+    background-color: darkcyan;
+    color:white;
+}
+
+6. Goto "app.module.ts"
+
+import { LoginComponent } from './login/login.component';
+
+@NgModule({
+  declarations: [
+    ..................
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [LoginComponent]
+})
+export class AppModule { }
+
+7. Goto "index.html" in "src" folder
+
+<body>
+   <app-login></app-login>
+</body>
+
+
+Adding Component by using Angular CLI Commands:
+============================================
+- CLI is a command line interface tool
+- It provides a set of commands used to handling angular application from console.
+- You can create components, services, pipes, classes, interfaces etc..
+- You configure library and packages for components.
+- It improves the development process by using "scaffolding" technique.
+
+
+1. Open a new Terminal [+]
+2. You can use the following commands
+
+      > ng generate component  <name>
+      > ng g c <name>
+
+      [Generate a component with 4 files
+	- name.component.ts
+	- name.component.html
+	- name.component.css
+	- name.component.spec.ts  (for testing)
+        ]
+
+ > ng g c <name> --skipTests=true    [test file will be ignored]
+      
+ > ng g c <name> --inlineTemplate=true  
+	
+    [it will  add a component with inline technique - only one file with HTML css and TS. It will not create separate files.]
+
+ > ng g c <name> --flat=true
+
+   [It will not create a separate folder for your component files , all files are added directly into "app" folder.]
+
+
+
+
+
