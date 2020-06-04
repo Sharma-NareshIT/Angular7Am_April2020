@@ -1,0 +1,179 @@
+Install and Enable Bootstrap
+
+1. Open Terminal and Type the command
+
+
+
+C:\AngularProjects\shoppingApp>npm install bootstrap
+
+
+
+	              ShoppingApp
+
+		|_node_modules
+
+		   |_bootstrap
+
+		      |_dist
+
+		         |_css
+
+		            |_bootstrap.css
+
+		               bootstrap.min.css
+
+
+
+2. Goto "Src\Styles.css" and import bootstrap core file
+
+
+
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+
+
+		 
+
+Ex:
+
+		login.component.html
+
+<div class="container">
+
+    <h2>{{title}}</h2>
+
+    <dl>
+
+        <dt>User Name</dt>
+
+        <dd><input type="text" class="form-control" ></dd>
+
+        <dt>Password</dt>
+
+        <dd><input type="password" class="form-control"></dd>
+
+    </dl>
+
+    <button class="btn btn-danger btn-block">Login</button>
+
+</div>
+
+
+
+		           Fontawesome
+
+	              [CSS Library for Symbols, Icons]
+
+1. Visit
+
+	https://fontawesome.com/
+
+
+
+2. Click Start for Free
+
+
+
+3. Click on Download
+
+
+
+4. Download Fontawesome free for Web
+
+
+
+5. UnZip the Folder and Copy all sub folders
+
+
+
+6. Goto you project "node_modules"
+
+
+
+7. Create a new Folder by name "Fonts" and paste all copied subfolders.
+
+		node_modules
+
+		|_Fonts
+
+		   |_css
+
+		      |_all.css
+
+
+
+Ex:
+
+<button class="btn btn-danger btn-block"> 
+
+<span class="fa fa-home"></span> Home 
+
+</button>
+
+
+
+	        Data Binding Angular
+
+	        ==================
+
+-Databinding is a technique that defines how data is accessed and binded to UI.
+
+-Data comes from business logic, which you have to bind
+
+ with the UI.
+
+- Angular uses frameworks like MVC and MVVM implicitly. Hence data binding is controlled by these frameworks.
+
+
+
+	      What is MVC?
+
+- MVC is an software architectural pattern.
+
+- Architectural patterns are same like design patterns but have broader scope. Resposible for building and controlling the application flow.
+
+- Developed by "Trygve" in early 1970's and Formulated with "Small Talk"
+
+- Code re-usability and Separation concerns
+
+- Every technolgy is using MVC Framework.
+
+	Java	Spring
+
+	PHP	Cake PHP, Code Igniter
+
+	Perl	Catalyst, Dancer
+
+	Python	Django, Flask, Grok
+
+	Ruby	Ruby on Rails
+
+	.NET	ASP.NET MVC
+
+	JavaScript   SPINE, Angular JS, Angular
+
+
+
+Features of MVC
+
+- Code Separation
+
+- Code Extensibility
+
+- Mantainability
+
+- Scalability
+
+- Unit Testing
+
+
+
+		Client Side MVC
+
+- MVC separates application is 3 major components
+
+	a) Model
+
+	b) View
+
+	c) Controller
