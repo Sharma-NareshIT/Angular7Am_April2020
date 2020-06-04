@@ -1,0 +1,55 @@
+	           Data Binding in Angular
+MVC - Model - View - Controller
+
+Model:
+- It represents the data we are working with as well as the business.
+- Client side it uses POJO [Plain Old JavaScript Objects]
+- It following ORM [Object Relational Mapper], which is a technique that maps to business requirements instead of database.
+- Client Side Data is mantained in Model references.
+- Apart from providing Data Objects model have no significance in this framework.
+
+View:
+- It describes the application UI
+- It is a template that dynamically renders HTML.
+
+Controller:
+- It is the core MVC component.
+- It handles the overall application flow.
+- It manages the communication between model and view
+- It comprises of application specific logic.
+- It accepts the user input and binds to model
+- It gets the data from model and binds to UI
+
+MVVM - Model - View - View MOdel
+
+- Model
+- View
+- ViewModel : It comprises of logic at UI [ViewModel]
+
+
+Angular Databinding Supports
+1. One way Binding
+      - It is readonly technique
+      - Model provides data which is update to view
+      - It is one time rendering
+      - There is no continous updates.
+      - Changes in the View are not updated to Model
+      - Angular handles one way binding by using 
+	a) Interpolation - binding to attribute by using
+		           {{ }}
+	b) Property Binding   [ ]
+	c) Attribute Binding   
+   
+
+<input type="text" id="txtName"  value ? Property / Attribute class="text-primary">
+<td colspan>  <table> - colspan, border
+
+ document.getElementById("txtName").value = property
+ document.getElementById("txtName").className = 
+
+2. Two Way Binding
+
+
+
+
+
