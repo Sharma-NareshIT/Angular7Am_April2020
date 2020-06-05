@@ -1,0 +1,123 @@
+Interpolation:
+===========
+- It is a data binding technique used by angular to bind model data to view by using data binding expression "{{ }}"
+- It dynamically evaluates a value and binds to view.
+- It supports only one way binding i.e any change in view will not update the model.
+
+  Syntax:
+	 public username = 'John';
+
+	 <input type="text" value="{{username}}">
+
+	 Hello ! {{username}}
+
+Ex:
+1. Goto ".component.ts"
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-login',
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
+})
+
+export class LoginComponent {
+    public product = {
+        Name: 'Samsung TV',
+        Price: 34000.44,
+        Qty: 2,
+        Mfd: new Date('2020/02/18'),
+        InStock: true
+    }
+}
+
+2. Goto ".component.html"
+
+<div class="container">
+    <h2>Product Details</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{product.Name}}</dd>
+        <dt>Price</dt>
+        <dd>{{product.Price}}</dd>
+        <dt>Quantity</dt>
+        <dd>{{product.Qty}}</dd>
+        <dt>Total</dt>
+        <dd>{{product.Qty * product.Price}}</dd>
+        <dt>Stock</dt>
+        <dd>{{(product.InStock==true)?"Available":"Out of Stock"}}</dd>
+    </dl>
+</div>
+
+Property Binding
+==============
+- HTML Element comprises of Properties
+	<img> Tag  → Image() 
+	<a>      Tag → Anchor
+    Ex:
+     <img src>
+	src is attribute
+    Ex:
+       var  pic = new Image();
+       pic.src = " ";
+	
+	src is property
+- HTML tag comprises of Attributes
+- Attributes are static      
+- Properties are dynamic
+- Angular allways recommends to bind the value dynamically to a property.
+- You can bind any value to a property by using Property binding technique "[ ]".
+
+  Syntax:
+	public  username = 'John';
+
+	<input type="text"  [value]="username">
+
+ Ex:
+        <dt>Name</dt>
+        <dd [innerHTML]="product.Name"></dd>
+
+Note: Every HTML attribute doesn't have a relative Property.
+          Property name can be different from attribute name.
+	Ex:
+	       <table  colspan>
+	       colspan is not available as property
+
+ solution: Better use attribute binding.
+
+Attribute Binding:
+===============
+ Angular allow to configure attributes for HTML element dynamically by marking them with prefix as "attr".
+
+ SYntax:
+	  public  mergecount = 2;
+	
+	  <th  [colspan]="mergecount">  //invalid
+
+	 colspan is not a property of <th>
+	 colspan is an attribute of <th>
+
+ Syntax:
+   <th [attr.colspan]="mergecount" >Student Name</th>
+
+Note: Any dynamic value can't be applied to attributes directly it requires interpolation or attribute binding.
+
+- The latest versions of Angular are provided with Attribute libary hence you can use the attributes directly but with angular reference name.
+
+	colspan = HTML attribute
+	colSpan = Angular attribute / you can use as 		property
+
+
+Ex:
+	public  photo = "assets/tv.jpg";
+
+	<img src="photo">    // invalid
+                 <img src="{{photo}}">  // valid
+                 <img [src]="photo">     // valid
+                 <img [attr.src]="photo">  // valid
+
+
+	      Two Way Binding
+
+  
