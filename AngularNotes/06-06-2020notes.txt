@@ -1,0 +1,109 @@
+Interpolation
+Attribute Binding
+Property Binding
+		Two Way Binding
+- It is a technique where the model is "Single-Source-of-Truth".
+- Model contains continous updates.
+- Model changes are updated to view and any change in view will be update to model.
+- Angular uses MVC and MVVM for Two way Binding.
+	Model - It represents and contains data
+	View - It presents the data
+	Controller - Defines the actions
+- Angular provide "ngModel" directive which uses Property and Event Binding technique to handle two way binding
+
+	[(ngModel)]="refName"
+
+	[ ]	= Binding to Property of control
+	( )	= Notifying the changes in control
+		   [Event]
+- ngModel directive is defined in "FormsModule" of  "@angular/core" library
+
+Ex:
+1. Goto app.module.ts
+
+ import { FormsModule } from '@angular/forms';
+ 
+imports: [
+    BrowserModule,
+    FormsModule
+  ],
+
+2. Add a new component
+	"twowaybinding"
+	- twowaybinding.component.ts
+	- twowaybinding.component.html
+	- twowaybinding.component.css
+
+3. twowaybinding.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-twowaybinding',
+    templateUrl: 'twowaybinding.component.html',
+    styleUrls: ['twowaybinding.component.css']
+})
+
+export class TwoWayBindingComponent {
+    public Name = 'Samsung TV';
+    public Price = 45000.55;
+    public City = 'Delhi';
+    public IsInStock = true;
+}
+
+3. twowaybinding.component.html
+
+<div class="container">
+  <h2>Register Product</h2>
+  <div class="form-group">
+    <label>Name</label>
+    <div>
+        <input [(ngModel)]="Name" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <div>
+        <input [(ngModel)]="Price" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Shipped To</label>
+    <div>
+        <select [(ngModel)]="City" class="form-control">
+            <option>Delhi</option>
+            <option>Hyderabad</option>
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Is In Stock</label>
+    <div>
+        <input [(ngModel)]="IsInStock" type="checkbox"> Yes
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Product Details</h2>
+  <dl>
+      <dt>Name</dt>
+      <dd>{{Name}}</dd>
+      <dt>Price</dt>
+      <dd>{{Price}}</dd>
+      <dt>Shipped To</dt>
+      <dd>{{City}}</dd>
+      <dt>Stock</dt>
+      <dd>{{(IsInStock==true)?"Available":"Out of Stock"}}</dd>
+  </dl>
+</div>
+
+5. twowaybinding.component.css
+
+.container {
+    width: 300px;
+    border:2px solid darkcyan;
+    box-shadow: 2px 2px 4px darkcyan;
+    padding: 30px;
+    float: left;
+    margin-left: 50px;
+}
