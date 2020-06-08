@@ -1,0 +1,129 @@
+One Way Binding
+	- interpolation
+	- property binding
+	- attribute binding
+Two Way Binding
+	- ngModel   FormsModule @angular/forms
+
+		Angular Directives
+		================
+- Directive is a function that can extend markup, return markup and make markup more interactive.
+- Directive makes HTML more declarative and dynamic.
+- Directive
+	Used as Element to Return Markup
+	Used as Attribute to extend Markup
+	Used as Class to make markup more interative
+- Angular provided several pre-defined directive, which are classified into 3 groups.
+
+	1. Component Directives
+	2. Structrual Directives
+	3. Attribute Directives
+
+Component Directive:
+- The component directive are the most commonly used directives responsible for returning markup in your application.
+- A component directive can also handle user interaction by configuring the login in "TypeScript".
+- It is used to dynamically render HTML.
+
+	Ex:  
+	       <app-home>
+	       home.component.html
+	       home.component.ts
+	       home.component.css
+
+
+2. Structural Directive
+- The structrual directive are responsible for changing the structure of View (UI).
+- The structural directive can dynamically handle any HTML component.
+- It is responsible for adding, removing and iterating the components in HTML.
+- The angular structural directives are
+	 a) ngIF
+	 b) ngSwitch
+	 c) ngFor
+- The structural directives  are added to HTML elements by using "*" 
+- They make HTML more declarative and dynamic
+
+Note: In Angular library directive comes from a module the module name will be the same as directive name.
+	Module	: NgIF
+	Directive	: ngIF
+          Angular 2+ uses directives in HTML elements by using the following syntax
+	<div  *ngIf=" ">
+          Angular JS uses directives in HTML elements by using the following syntax
+	<div  ng-if="">
+
+
+		"NgIF"
+- ngIf is a structrual directive used to Add or Remove any element from DOM hierarchy.
+- It uses a boolean value or condition, which can add or remove element according to the state.
+
+Syntax:
+	<div  *ngIf="true/false"> 
+	true → Add div into HTML page
+	false → Remove div from HTML page.
+
+
+Ex:
+1. Add a new component
+	ifdemo
+	- ifdemo.component.html
+	- ifdemo.component.ts
+	- ifdemo.component.css
+
+2. ifdemo.component.ts
+
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'app-ifdemo',
+    templateUrl: 'ifdemo.component.html',
+    styleUrls: ['ifdemo.component.css']
+})
+
+export class IfDemoComponent {
+  public product = {
+      Name: 'Nike Casuals',
+      Price: 4500.55,
+      Photo: 'assets/shoe.jpg',
+      Mfd: new Date('2020/04/10')
+  };
+  public showImage = false;
+  public btnText = 'Show';
+  public ShowButtonClick() {
+      this.showImage = (this.showImage==false)?true:false;
+      this.btnText = (this.btnText == 'Show')?'Hide':'Show';
+  }
+}
+
+3. ifdemo.component.html
+
+<div class="container-fluid">
+  <h2>Product Details</h2>
+  <div class="box">
+    <dl>
+        <dt>Name</dt>
+        <dd>{{product.Name}}</dd>
+        <dt>Price</dt>
+        <dd>{{product.Price}}</dd>
+        <dt>Manufactured</dt>
+        <dd>{{product.Mfd.toDateString()}}</dd>
+        <dd>
+            <button (click)="ShowButtonClick()" class="btn btn-primary">{{btnText}} Preview</button>
+        </dd>
+    </dl>
+  </div>
+  <div class="box">
+     <div *ngIf="showImage">
+         <img src="{{product.Photo}}" width="200" height="200">
+     </div>
+  </div>
+</div>
+
+4. ifdemo.component.css
+
+.box {
+    float: left;
+    margin-left: 30px;
+    padding: 20px;
+}
+
+
+	
