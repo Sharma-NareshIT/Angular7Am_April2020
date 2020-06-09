@@ -1,0 +1,100 @@
+		      NgIF
+- You can assign "ngIF" to any HTML element.
+- In various situations without distrubing the HTML layout we have to conditionally add or remove content.
+- Angular Provides  a conditionaly container which you can use to define content dynamically into HTML without disturbing the Layout. The Angular Container for Conditions is "<ng-template>".
+- <ng-template> uses the structrual directives as Properties.
+
+Syntax:
+	<ng-template [ngIf]="boolean">
+	     --- your content ---
+	</ng-template>
+
+Ex: Replace the <div> with <ng-template> for image
+
+<div class="box">
+     <ng-template [ngIf]="showImage">
+         <img src="{{product.Photo}}" width="200" height="200">
+     </ng-template>
+</div>
+
+	           Attributes for "ngIf"
+	          =================
+You can conditionally handle the HTML blocks by using "ngIf" attributes:
+		a) else
+		b) then
+
+ "then" → comprises of content to display when condition
+	is true.
+
+  "else" → comprises of content to display when condition
+	is false.
+
+    Legacy Syntax:
+	             if   condition then
+	              statement if true;
+	             else
+	              statement if false
+
+Syntax:
+   <div *ngIf="booleanCondition; then  thenBlock else elseBlock">
+   </div>
+   <ng-template  #thenBlock>
+        ---------- if true ----------
+   </ng-template>
+   <ng-template  #elseBlock>
+       ----------- if false -------
+   </ng-template>
+
+Ex:
+1. ifdemo.component.ts
+
+     public IsInStock = false;
+
+2. ifdemo.component.html
+<div>
+  <input type="checkbox" [(ngModel)]="IsInStock"> In Stock
+</div>
+<div *ngIf="IsInStock; then thenBlock else elseBlock">
+</div>
+<ng-template #thenBlock>
+   <img src="assets/shoe.jpg" width="200" height="200">
+   <h4 class="text-success">Available</h4>
+</ng-template>
+<ng-template #elseBlock>
+   <img src="assets/shoeOutOfStock.jpg" width="200" height="200">
+   <h4 class="text-danger">N/A</h4>
+</ng-template>
+
+
+ 		ngSwitch Directive
+- It is an angular structural directive used to handle multple conditions in the UI and display only the block of template that matches the given condition.
+- The directive use for switch is 
+	"ngSwitch"
+- The attributes with ngSwitch are
+	ngSwitchCase
+	ngSwitchDefault
+- Switch defines the main condition
+- Case defines the content to display when condition matches.
+- Default defines the content to display when case is not matching with the condition defined.
+
+Syntax:
+	<main-container [ngSwitch]="condition">
+	    <child-container *ngSwitchCase="value">
+	    <child-container>
+	    <child-container *ngSwitchDefault>
+	    </child-container>
+	</main-container>
+
+- ngSwitch is used in UI to conditionally switch between views.
+
+<div [ngSwitch]=" 'three' ">
+  <div *ngSwitchCase="'one'">Choice is 1</div>
+  <div *ngSwitchCase="'two'">Choice is 2</div>
+  <div *ngSwitchDefault>Please Choose 1 or 2</div>
+</div>
+
+
+
+
+
+
