@@ -1,0 +1,92 @@
+ngSwitch
+ngSwitchCase
+ngSwitchDefault
+
+<div [ngSwitch]=" 'three' ">
+  <div *ngSwitchCase="'one'">Choice is 1</div>
+  <div *ngSwitchCase="'two'">Choice is 2</div>
+  <div *ngSwitchDefault>Please Choose 1 or 2</div>
+</div>
+
+Ex:
+1. Add a component 
+	"SwitchDemo"
+
+2. switchdemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-switchdemo',
+    templateUrl: 'switchdemo.component.html',
+    styleUrls: ['switchdemo.component.css']
+})
+
+export class SwitchDemoComponent {
+  public product = {
+      Name: 'Samsung TV',
+      Price: 50000.44,
+      Description: 'Something about Samsung TV...',
+      Mfd: new Date('2020-04-10'),
+      Photo: 'assets/tv.jpg'
+  };
+  public selectedView = 'info';
+  public ChooseView(e) {
+       this.selectedView = e.target.value;
+  }
+}
+
+3. switchdemo.component.html
+
+<div class="container-fluid">
+ <h2>Product Details</h2>
+ <div class="btn-toolbar bg-danger justify-content-between">
+   <div class="btn-group">
+     <button (click)="ChooseView($event)" value="info" class="btn btn-danger">Product Info</button>
+     <button (click)="ChooseView($event)" value="description" class="btn btn-danger">Description</button>
+     <button (click)="ChooseView($event)" value="preview" class="btn btn-danger">Preview</button>
+   </div>
+   <div class="btn-group">
+    <select [(ngModel)]="selectedView" class="form-control">
+        <option value="info">Product Info</option>
+        <option value="description">Description</option>
+        <option value="preview">Preview</option>
+    </select>
+   </div>
+ </div>
+ <div [ngSwitch]="selectedView" style="margin-top: 50px;">
+    <div class="card" *ngSwitchCase="'info'" >
+        <div class="card-header">
+            <h2>Product Info</h2>
+        </div>
+        <div class="card-body">
+            <dl>
+                <dt>Name</dt>
+                <dd>{{product.Name}}</dd>
+                <dt>Price</dt>
+                <dd>{{product.Price}}</dd>
+                <dt>Manufactured</dt>
+                <dd>{{product.Mfd.toDateString()}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="card" *ngSwitchCase="'description'">
+        <div class="card-header">
+            <h3 class="card-title">Product Description</h3>
+        </div>
+        <div class="card-body">
+            <p  class="card-text">{{product.Description}}</p>
+        </div>
+    </div>
+    <div class="card" *ngSwitchCase="'preview'">
+        <div class="card-header">
+            <h3 class="card-title">Preview</h3>
+        </div>
+        <div class="card-body">
+            <img src="{{product.Photo}}" width="200" height="200">
+        </div>
+    </div>
+ </div>
+</div>
+
+ngFor
