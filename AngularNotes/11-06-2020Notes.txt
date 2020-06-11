@@ -1,0 +1,149 @@
+		        ngFor
+- It is an angular directive used to repeat any DOM element using iterator pattern.
+- Iterator pattern allows to access elements from a collection in sequential order. It is a software design pattern. [Behavioral Pattern].
+
+ Syntax:
+	<li *ngFor="let item of collection">
+	<li ng-repeat=""> in early Angular Js
+
+JQuery:
+  var categories = [ ];
+   $.each(categories, function(key, val) { 
+          $(`<li> ${val} </li>`).appendTo("#list");
+    })
+  <ol id="list">
+
+JavaScript:
+   for(var item of categories)
+   {
+        var li = document.createElement("li");
+        li.innerHTML = item;
+        document.getElementById("list").appendChild(li);
+    }
+
+Ex:
+1. Add a new component
+	> ng g c  fordemo --skipTests=true
+2. fordemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-fordemo',
+  templateUrl: './fordemo.component.html',
+  styleUrls: ['./fordemo.component.css']
+})
+export class FordemoComponent {
+ public categories = ['Electronics', 'Footwear', 'Fashion', 'Mobiles'];
+}
+
+3. fordemo.component.html
+
+<div class="container-fluid">
+    <h2>Amazon Shopping</h2>
+    <ol class="nav ">
+        <li class="nav-item" *ngFor="let  item of categories">
+            <a class="nav-link" href="#">{{item}}</a>
+        </li>
+    </ol>
+    <h2>Categories</h2>
+    <ol>
+        <li *ngFor="let item of categories">
+            {{item}}
+        </li>
+    </ol>
+    <h2>Choose a Category</h2>
+    <select class="form-control">
+        <option *ngFor="let item of categories">
+            {{item}}
+        </option>
+    </select>
+</div>
+
+
+- ngFor can iterate over complex data i.e JSON type data.
+
+Ex:
+1. fordemo.component.ts
+
+  export class FordemoComponent {
+  public data = [
+    {Name: 'Samsung TV', Price: 34000.44, Photo: 'assets/tv.jpg'},
+    {Name: 'JBL Speaker', Price: 2300.44, Photo: 'assets/jblspeaker.jpg'},
+    {Name: 'Nike Casuals', Price: 4000.55, Photo: 'assets/shoe.jpg'}
+  ];
+}
+
+2. fordemo.component.html
+
+<div class="container-fluid">
+  <h2>Products List</h2>
+  <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Preview</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data">
+            <td>{{item.Name}}</td>
+            <td>{{item.Price}}</td>
+            <td><img src="{{item.Photo}}" width="50" height="50"></td>
+        </tr>
+    </tbody>
+  </table>
+  <h2>Products Catalog</h2>
+  <div class="card-deck">
+    <div class="card" *ngFor="let item of data">
+        <div class="card-header">
+            <h2 class="card-title">{{item.Name}}</h2>
+        </div>
+        <div class="card-body">
+            <img src="{{item.Photo}}" width="100" height="100">
+        </div>
+        <div class="card-footer">
+            <h3>{{item.Price}}</h3>
+            <button class="btn btn-danger"><span class="fa fa-shopping-cart"></span>Add to Cart</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+- ngFor allows nested Iterations
+
+Ex:
+1. fordemo.component.ts
+
+export class FordemoComponent {
+  public data = [
+    {Category: 'Electronics', Products: ['Samsung TV', 'JBL Speaker']},
+    {Category: 'Fashion', Products: ['T-Shirt', 'Jeans']}
+  ];
+}
+
+2. fordemo.component.html
+
+<div class="container-fluid">
+   <h2>Shopping Online</h2>
+   <ol>
+       <li *ngFor="let item of data">
+           {{item.Category}}
+           <ol type="a">
+             <li *ngFor="let product of item.Products">
+                {{product}}
+             </li>
+           </ol>
+       </li>
+   </ol>
+   <h2>Choose a Product</h2>
+   <select class="form-control">
+       <optgroup *ngFor="let item of data" label="{{item.Category}}" >
+         <option *ngFor="let product of item.Products">
+            {{product}}
+         </option>
+       </optgroup>
+   </select>
+</div>
+
