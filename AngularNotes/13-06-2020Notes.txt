@@ -1,0 +1,91 @@
+even, odd, first, last : These  are boolean properties that return true on specific occurance i.e even, odd, first and last. You can identify its position in iterator.
+
+Ex:
+1. iterator.component.css
+
+.even {
+    background-color: lightgreen;
+}
+.odd {
+    background-color: yellow;
+}
+
+2. iterator.component.html
+
+<tr [class.odd]="odd" [class.even]="even" *ngFor="let product of products; let i=index; let odd=odd; let even=even">
+
+		    trackBy
+- It is a function pointer.
+- It purpose is to identify the change in iterator and perform iteration only when change occurred.
+- It will iterate the existing records in collection.
+- Iterator will work only to read the newly added item into collection.
+- This make the iterator asynchronous.
+
+Ex:
+1. Add a new component
+		> ng g c trackdemo --skipTests=true
+
+2. trackdemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-trackdemo',
+  templateUrl: './trackdemo.component.html',
+  styleUrls: ['./trackdemo.component.css']
+})
+export class TrackdemoComponent {
+  public products = [
+    {ProductId: 1, Name: 'Samsung TV', Price: 45000.55},
+    {ProductId: 2, Name: 'Mobile', Price: 13000.55},
+    {ProductId: 3, Name: 'Nike Casuals', Price: 6000.55},
+  ];
+  public AddNewProduct(){
+    alert('Clicked');
+    this.products = [
+      {ProductId: 1, Name: 'Samsung TV', Price: 45000.55},
+      {ProductId: 2, Name: 'Mobile', Price: 13000.55},
+      {ProductId: 3, Name: 'Nike Casuals', Price: 6000.55},
+      {ProductId: 4, Name: 'Watch', Price: 3000.55},
+    ];
+  }
+  public TrackChanges(index, product) {
+    return product.ProductId;
+  }
+}
+
+3. trackdemo.component.html
+
+<div class="container">
+    <h2>Products List</h2>
+    <div>
+        <button (click)="AddNewProduct()" class="btn btn-primary">Add Product</button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products; trackBy: TrackChanges">
+                <td>{{product.ProductId}}</td>
+                <td>{{product.Name}}</td>
+                <td>{{product.Price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+Observation:  Open Debugger and View the changes in <tr>
+	       when add button click.
+
+
+
+
+
+
+ [class]="className"
+ [class.className]="condition-true/false"
