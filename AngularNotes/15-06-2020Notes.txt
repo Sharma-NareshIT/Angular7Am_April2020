@@ -1,0 +1,118 @@
+Ex:
+1. Add a new Component
+	> ng g c likesdemo  --skipTests=true
+
+2. likesdemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-likesdemo',
+  templateUrl: './likesdemo.component.html',
+  styleUrls: ['./likesdemo.component.css']
+})
+export class LikesdemoComponent {
+     public products = [
+       {Name: 'JBL Speaker', Photo: 'assets/jblspeaker.jpg', Likes: 0, Dislikes: 0},
+       {Name: 'Earpods', Photo: 'assets/earpods.jpg', Likes: 0, Dislikes: 0},
+       {Name: 'Nike Casuals', Photo: 'assets/shoe.jpg', Likes: 0, Dislikes: 0},
+     ];
+     public LikesCounter(product) {
+        product.Likes++;
+     }
+     public DislikesCounter(product) {
+        product.Dislikes++;
+     }
+}
+
+3. likedemo.component.html
+
+<div class="container-fluid">
+    <h2>Products Catalog</h2>
+    <div class="card-deck">
+        <div class="card" *ngFor="let product of products">
+            <div class="card-header text-center">
+                <h3 class="card-title">{{product.Name}}</h3>
+            </div>
+            <div class="card-body">
+                <img src="{{product.Photo}}" width="100" height="100">
+            </div>
+            <div class="card-footer text-center">
+                <button (click)="LikesCounter(product)" class="btn btn-outline-success">
+                    <span>{{product.Likes}}</span>
+                    Like(s)
+                    <span class="fa fa-thumbs-up"></span>
+                </button>
+                <button (click)="DislikesCounter(product)" class="btn btn-outline-danger">
+                    <span>{{product.Dislikes}}</span>
+                    Dislike(s)
+                    <span class="fa fa-thumbs-down"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+Note: A single HTML element can't handle multiple structrual directives. 
+         You can't apply multiple structural directives on one HTML element.
+
+	<div  *ngFor=""   *ngIf="">    // invalid
+	
+         Always implement structrual components of Angular to handle multiple structrual directives.
+	<ng-template>
+	<ng-container>
+	<ng-component>
+
+Ex: Iteration and Conditions
+
+1. Add a new Component
+	> ng g conditions --skipTests=true
+
+2. conditions.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-conditions',
+  templateUrl: './conditions.component.html',
+  styleUrls: ['./conditions.component.css']
+})
+export class ConditionsComponent{
+  public products = [
+    {Name: 'JBL Speaker', Photo: 'assets/jblspeaker.jpg', Category: 'Electronics'},
+    {Name: 'Earpods', Photo: 'assets/earpods.jpg',  Category: 'Electronics'},
+    {Name: 'Nike Casuals', Photo: 'assets/shoe.jpg',  Category: 'Footwear'},
+    {Name: 'Lee Boot', Photo: 'assets/shoe1.jpg',  Category: 'Footwear'},
+  ];
+  public selectedCategoryName = 'All';
+}
+
+
+3. conditions.component.html
+
+<div class="container-fluid">
+    <h2 class="text-primary text-center">Amazon Shopping</h2>
+  <div class="row">
+    <div class="col-3">
+        <h4>Search Products</h4>
+        <select [(ngModel)]="selectedCategoryName" class="form-control">
+            <option>All</option>
+            <option>Electronics</option>
+            <option>Footwear</option>
+        </select>
+    </div>
+    <div class="col-9">
+        <div class="card-deck">
+           <ng-container *ngFor="let item of products">
+            <div class="card" *ngIf="selectedCategoryName=='All' || selectedCategoryName==item.Category">
+                <img src="{{item.Photo}}" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h2>{{item.Name}}</h2>
+                </div>
+            </div>
+           </ng-container>
+        </div>
+    </div>
+  </div>
+</div>
+
