@@ -1,0 +1,111 @@
+		Attribute Directives
+- Attribute Directives are used as attributes of elements.
+- They can change the appearence and behavior of HTML elements dynamically.
+- Angular Attribute directives as
+	a) NgModel
+	b) NgClass
+	c) NgStyle
+
+NgModel:  It binds a property with HTML DOM element. It supports two way binding. 
+
+	<input type="text" [(ngModel)]="Name">
+
+NgClass: 
+- It is used to bind a CSS class dynamically to any HTML element. So that element can change its appearence dynamically according to state.
+
+- NgClass allows to bind a CSS class to HTML element with 3 different reference styles:
+
+1. Refer as String : It is a reference method used to apply any specific CSS class. It generally allows to apply only one CSS class to element.
+
+ Syntax:
+	<h2  [ngClass]=" 'className' ">
+
+2. Refer as Array: It is a reference method used to apply multiple CSS classes to any element.
+
+Syntax:
+	<h2 [ngClass]="['class1', 'class2']">
+
+Ex:
+ - Add a new component
+	>ng g c classdemo --skipTests=true
+
+- classdemo.component.css
+
+.textEffects {
+    color:red;
+    text-align: center;
+}
+.backEffects {
+    background-color: yellow;
+}
+.borderEffects {
+    border:2px dotted red;
+}
+
+- classdemo.component.ts
+
+export class ClassdemoComponent {
+   public effects;
+}
+
+- classdemo.component.html
+
+<div class="container-fluid">
+  <div class="form-group">
+    <label>Apply Effects</label>
+    <input [(ngModel)]="effects" type="text" class="form-control" placeholder="eg: textEffects, borderEffects, backEffects">
+  </div>
+  <div class="form-group">
+    <h2 [ngClass]="effects">Sample Text</h2>
+  </div>
+</div>
+
+
+3. Refer as Object
+- It is a reference technique that allows to ON/OFF the CSS class dynamically.
+- You can switch between effects.
+
+Syntax:
+   <h2  [ngClass]="{className:true, className:false}">
+
+
+Ex:
+- classdemo.component.ts
+
+export class ClassdemoComponent {
+   public isBackgroundChecked = false;
+   public isBorderChecked = false;
+   public isTextChecked = false;
+}
+
+- classdemo.component.html
+
+<div class="container-fluid">
+  <div class="form-group">
+    <label>Apply Effects</label>
+    <ul class="list-unstyled">
+        <li><input [(ngModel)]="isTextChecked" type="checkbox"> Text Effects </li>
+        <li><input [(ngModel)]="isBackgroundChecked" type="checkbox"> Back Effects </li>
+        <li><input [(ngModel)]="isBorderChecked" type="checkbox"> Border Effects </li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <h2 [ngClass]="{textEffects:isTextChecked, backEffects:isBackgroundChecked, borderEffects:isBorderChecked}">Sample Text</h2>
+  </div>
+</div>
+
+Note: CSS class names are usually separated with "-".
+          In object reference class name must be in single quotes if it is using special chars.
+
+Syntax:
+.text-Effects {
+
+}
+
+<h2 [ngClass]="{'text-Effects':isTextChecked, backEffects:isBackgroundChecked, borderEffects:isBorderChecked}">Sample Text</h2>
+
+
+ngStyle
+	<div style>  inline
+	<div class>
+
