@@ -1,0 +1,165 @@
+NgClass
+NgStyle - It is used to apply inline styles dynamically for any HTML Element. If you want styles for an object without reusability concerns then you defined inline style binding.
+
+Syntax:
+	<div  [ngStyle]="styleObject{}"> </div>
+
+Ex: Using a styleObject
+
+1. Add a new component
+	>ng g c styledemo --skipTests=true
+
+2. styledemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-styledemo',
+  templateUrl: './styledemo.component.html',
+  styleUrls: ['./styledemo.component.css']
+})
+export class StyledemoComponent {
+     public styleObj;
+     public GetPosition(e){
+       this.styleObj = {
+         'position': 'fixed',
+         'top': e.clientY + 'px',
+         'left': e.clientX + 'px'
+       };
+     }
+}
+
+3. styledemo.component.html
+
+<div (mousemove)="GetPosition($event)" class="container-fluid">
+  <div style="height: 1000px;">
+
+  </div>
+  <img [ngStyle]="styleObj" src="assets/flag.gif" width="50" height="50">
+</div>
+
+
+Ex: Using the styles directly 
+1. styledemo.component.ts
+
+export class StyledemoComponent {
+     public bgcolor;
+     public txtcolor;
+     public align;
+     
+}
+
+2. styledemo.component.html
+
+<div class="container-fluid">
+    <h2>Apply Styles</h2>
+   <div class="row">
+    <div class="col-3">
+        <dl>
+            <dt>Background Color</dt>  
+            <dd>
+                <select [(ngModel)]="bgcolor" class="form-control">
+                  <option>Red</option>
+                  <option>Green</option>
+                  <option>Blue</option>
+                </select>
+            </dd>
+            <dt>Foreground Color</dt>
+            <dd>
+                <select [(ngModel)]="txtcolor" class="form-control">
+                  <option>Black</option>
+                  <option>White</option>
+                  <option>Yellow</option>
+                </select>
+            </dd>
+            <dt>Alignment</dt>
+            <dd>
+                <input [(ngModel)]="align" type="radio" name="align" value="Left"> Left
+                <input [(ngModel)]="align" type="radio" name="align" value="Center"> Center
+                <input [(ngModel)]="align" type="radio" name="align" value="Right"> Right
+            </dd>
+          </dl>
+    </div>
+    <div class="col-9">
+        <div style="margin:auto; align-items: center; justify-content: center;">
+            <h2 [ngStyle]="{'background-color':bgcolor,'color':txtcolor,'text-align':align}">Sample Text</h2>
+        </div>
+    </div>
+   </div>
+</div>
+
+Ex: Return effects using a function
+
+1. styledemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-styledemo',
+  templateUrl: './styledemo.component.html',
+  styleUrls: ['./styledemo.component.css']
+})
+export class StyledemoComponent {
+     public bgcolor;
+     public txtcolor;
+     public align;
+
+     public newbgColor;
+     public newtxtColor;
+     public newAlign;
+     public ReturnEffects() {
+        return {
+          'background-color': this.newbgColor,
+          'color': this.newtxtColor,
+          'text-align': this.newAlign
+        };
+     }
+     public ApplyClick() {
+       this.newbgColor = this.bgcolor;
+       this.newtxtColor = this.txtcolor;
+       this.newAlign = this.align;
+       this.ReturnEffects();
+     }
+}
+
+
+2. styledemo.component.html
+
+<div class="container-fluid">
+    <h2>Apply Styles</h2>
+   <div class="row">
+    <div class="col-3">
+        <dl>
+            <dt>Background Color</dt>  
+            <dd>
+                <select [(ngModel)]="bgcolor" class="form-control">
+                  <option>Red</option>
+                  <option>Green</option>
+                  <option>Blue</option>
+                </select>
+            </dd>
+            <dt>Foreground Color</dt>
+            <dd>
+                <select [(ngModel)]="txtcolor" class="form-control">
+                  <option>Black</option>
+                  <option>White</option>
+                  <option>Yellow</option>
+                </select>
+            </dd>
+            <dt>Alignment</dt>
+            <dd>
+                <input [(ngModel)]="align" type="radio" name="align" value="Left"> Left
+                <input [(ngModel)]="align" type="radio" name="align" value="Center"> Center
+                <input [(ngModel)]="align" type="radio" name="align" value="Right"> Right
+            </dd>
+          </dl>
+          <button (click)="ApplyClick()" class="btn btn-success btn-block">Apply Effects</button>
+    </div>
+    <div class="col-9">
+        <div style="margin:auto; align-items: center; justify-content: center;">
+            <h2 [ngStyle]="ReturnEffects()">Sample Text</h2>
+        </div>
+    </div>
+   </div>
+</div>
+		   Event Binding
