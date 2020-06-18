@@ -1,0 +1,104 @@
+	            Angular Event Binding
+- Event is a message sent by sender to its subscriber in order to notify the change.
+- Event follows a software design pattern called "Observer".
+- Observer is a common communication pattern [Behavioral Pattern].
+- Event is using a delegate mechanism [function pointer]
+- Angular can make use of all JavaScript browser events.
+- Events are categorized into several groups
+	a) Mouse Events
+	b) Key Events	
+	c) Timer Events
+	d) Miscelaneous Events
+- Angular can binding Events to HTML Elements by using event binding technique.
+
+	<button  (click)="f1()"> </button>
+
+	(click)		→ Event
+	(click)="f1()"	→ Event Handler
+
+- Events have event args.
+- JavaScript uses "this" & "event"  as event args.
+  Syntax:
+	<button onclick="f1(this,event)">
+      this → comprises of object related properties like
+	 value, id, class, name etc..
+      event → comprises  of event related properties like
+	    clientX, clientY, shiftKey, ctrlKey, altKey etc..
+
+- Angular can't use "this" as it is a keyword of typescript.
+- Hence "$event" is used as event arg, which can access both event and object related properties.
+- The object related properties are defined in 
+	"$event.target"
+- The event related propeties are defined in 
+	"$event"
+
+Syntax:
+	public  btnClick(obj) {
+	       obj.eventMembers;
+	       obj.target.objectMembers;
+	}
+	<button (click)="btnClick($event)">
+	
+		KeyEvent Binding
+- It defines the actions to perform when user is keying-in the chars.
+- The key events are:
+	
+Event		Description
+--------------------------------------------------------------------------------------
+keyup		specifies actions to perform when key
+		is released over any element.
+keydown		specifies action to perform when user
+		hold down a key on any specific 			element.
+keypress		specifies actions to perform when 
+		user finish using a key.
+
+
+Ex: keyup
+
+1. Add component
+	> ng g c  keydemo
+
+2. keydemo.component.ts
+
+import { Component} from '@angular/core';
+
+@Component({
+  selector: 'app-keydemo',
+  templateUrl: './keydemo.component.html',
+  styleUrls: ['./keydemo.component.css']
+})
+export class KeydemoComponent{
+   public users = [
+     {UserName: 'john'},
+     {UserName: 'john12'},
+     {UserName: 'john_nit'},
+     {UserName: 'david'}
+    ];
+    public txtUserName;
+    public msg;
+    public validClass=false;
+    public invalidClass=false;
+    public VerifyUserName(){
+         for(var user of this.users) {
+            if(user.UserName == this.txtUserName) {
+              this.invalidClass = true;
+              this.validClass= false;
+              this.msg = 'User Name Taken - Try Another';
+              break;
+            } else {
+              this.invalidClass = false;
+              this.validClass = true;
+              this.msg = 'User Name Available';
+            }
+         }
+    }
+}
+
+3. keydemo.component.html
+
+<div class="container">
+    <h2>Register User</h2>
+    <input (keypress)="VerifyUserName()" placeholder="User Name" [(ngModel)]="txtUserName" type="text" class="form-control">
+    <span [ngClass]="{'text-success':validClass, 'text-danger':invalidClass}" >{{msg}}</span>
+</div>
+
