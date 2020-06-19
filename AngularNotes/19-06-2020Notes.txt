@@ -1,0 +1,101 @@
+Key Event Binding
+- keyup
+- keydown
+- keypress
+
+keyCode		: returns the actual keycode
+		  A-65, Z-90, a-97, z-122
+charCode		: returns the char code as per UTF
+		  [only on key press]
+which		: It similar to keycode but supported for
+		  all type of keyboard layouts.
+shiftKey		:
+altKey		:  return true or false 
+ctrlKey		:
+
+
+Ex:
+1. keydemo.component.ts
+
+import { Component} from '@angular/core';
+
+@Component({
+  selector: 'app-keydemo',
+  templateUrl: './keydemo.component.html',
+  styleUrls: ['./keydemo.component.css']
+})
+export class KeydemoComponent{
+   public users = [
+     {UserName: 'john'},
+     {UserName: 'john12'},
+     {UserName: 'john_nit'},
+     {UserName: 'david'}
+    ];
+    public txtUserName;
+    public msg;
+    public validClass=false;
+    public invalidClass=false;
+    public showWarning = false;
+    public showUserWarning = true;
+
+    public onBlur() {
+      this.showUserWarning = false;
+    }
+
+    public VerifyUserName(){
+         for(var user of this.users) {
+            if(user.UserName == this.txtUserName) {
+              this.invalidClass = true;
+              this.validClass= false;
+              this.msg = 'User Name Taken - Try Another';
+              break;
+            } else {
+              this.invalidClass = false;
+              this.validClass = true;
+              this.msg = 'User Name Available';
+            }
+         }
+    }
+    
+    public VerifyCaps(e){
+       if(e.keyCode>=65 && e.keyCode<=90) {
+         this.showWarning = true;
+       } else {
+         this.showWarning = false;
+       }
+    }
+}
+
+
+2. keydemo.component.html
+
+<div class="container">
+    <h2>Register User</h2>
+    <div class="form-group">
+        <input (blur)="onBlur()" (keyup)="VerifyUserName()" placeholder="User Name" [(ngModel)]="txtUserName" type="text" class="form-control">
+        <span *ngIf="showUserWarning" [ngClass]="{'text-success':validClass, 'text-danger':invalidClass}" >{{msg}}</span>
+    </div>
+    <div class="form-group">
+        <input (keypress)="VerifyCaps($event)" placeholder="Password" type="password" class="form-control">
+        <div *ngIf="showWarning">
+            <span  class="fa fa-exclamation-triangle text-warning"></span><span>Caps is ON</span>
+        </div>
+    </div>
+</div>
+
+		 Miscelaneous Events
+change	 : It specifies the actions to perform when user
+	   is changing value in any HTML element.
+
+
+
+
+
+
+
+
+
+
+
+
+
