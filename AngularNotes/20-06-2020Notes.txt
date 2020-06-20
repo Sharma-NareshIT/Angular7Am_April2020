@@ -1,0 +1,157 @@
+1. Add a new component 
+         > ng g c  changedemo  --skipTests=true
+         
+2. changedemo.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-changedemo',
+  templateUrl: './changedemo.component.html',
+  styleUrls: ['./changedemo.component.css']
+})
+export class ChangedemoComponent {
+  public categories = ['Select a Category', 'Electronics', 'Footwear', 'Fashion'];
+  public electronics = ['Select a Product', 'JBL Speaker', 'Samsung TV'];
+  public footwear = ['Select a Product', 'Nike Casuals', 'Lee Cooper Boot'];
+  public fashion = ['Select a Product', 'Jeans', 'Shirt'];
+  public products = [];
+  public data = [
+    {Name: 'Samsung TV', Price: 45000.55, Photo: 'assets/tv.jpg'},
+    {Name: 'JBL Speaker', Price: 4000.55, Photo: 'assets/jblspeaker.jpg'},
+    {Name: 'Nike Casuals', Price: 7000.55, Photo: 'assets/shoe.jpg'},
+    {Name: 'Lee Cooper Boot', Price: 1000.55, Photo: 'assets/shoe1.jpg'},
+    {Name: 'Jeans', Price: 3000.55, Photo: 'assets/jeans.jpg'},
+    {Name: 'Shirt', Price: 1500.55, Photo: 'assets/shirt.jpg'},
+  ];
+  public selectedCategory = 'Select a Category';
+  public selectedProduct = 'Select a Product';
+  public searchResult = [];
+  public cartItems = [];
+  public cartItemsCount = 0;
+  public showCart = false;
+  
+  public prodName;
+  public prodPrice;
+  public prodPhoto;
+
+  public OnCategoryChange(){
+     switch(this.selectedCategory) {
+       case 'Electronics':
+         this.products = this.electronics;
+         break;
+       case 'Footwear':
+         this.products = this.footwear;
+         break;
+       case 'Fashion':
+         this.products = this.fashion;
+         break;
+
+     }
+  }
+  public onProductChange(){
+    this.searchResult = this.data.filter(x=>x.Name==this.selectedProduct);
+    
+      this.prodName = this.searchResult[0].Name;
+      this.prodPrice = this.searchResult[0].Price;
+      this.prodPhoto = this.searchResult[0].Photo;
+    
+  }
+  public AddToCartClick(){
+    this.cartItems.push(this.searchResult[0]);
+    this.cartItemsCount = this.cartItems.length;
+    alert('Item Added to Cart');
+  }
+  public ToggleCart(){
+    this.showCart = (this.showCart==false)?true:false;
+  }
+  public DeleteCartItem(index){
+    let status = confirm('Are you sure, want to Delete?');
+    if(status==true)
+    {
+    this.cartItems.splice(index, 1);
+    this.cartItemsCount = this.cartItems.length;
+    }
+  }
+}
+
+3. changedemo.component.html
+
+<div class="container-fluid">
+ <h2 class="text-primary text-center">Amazon Shopping</h2>
+ <div class="row">
+    <div class="col-3">
+        <div class="form-group">
+            <label>Select Category</label>
+            <div>
+                <select (change)="OnCategoryChange()" [(ngModel)]="selectedCategory" class="form-control">
+                    <option *ngFor="let item of categories">
+                        {{item}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Select Product</label>
+            <div>
+                <select (change)="onProductChange()" [(ngModel)]="selectedProduct" class="form-control">
+                    <option *ngFor="let item of products">
+                        {{item}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Preview</label>
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{prodName}}</h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{prodPhoto}}" width="100" height="100">
+                </div>
+                <div class="card-footer">
+                    <h4>{{prodPrice|currency:'INR'}}</h4>
+                    <button (click)="AddToCartClick()" class="btn btn-danger btn-block"><span class="fa fa-shopping-cart"></span>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-7">
+        <div *ngIf="showCart">
+            <h3>Your Cart Summary</h3>
+            <div class="form-group">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Preview</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cartItems; let i=index">
+                        <td>{{item.Name}}</td>
+                        <td>{{item.Price}}</td>
+                        <td><img src="{{item.Photo}}" width="50" height="50"></td>
+                        <td>
+                            <button (click)="DeleteCartItem(i)" class="btn btn-outline-danger">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+           
+        </div>
+    </div>
+    <div class="col-2">
+        <button (click)="ToggleCart()" class="btn btn-info">
+            <span class="fa fa-shopping-cart"></span>
+            [{{cartItemsCount}}] Your Cart Items
+        </button>
+    </div>
+ </div>
+</div>
