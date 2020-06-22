@@ -1,0 +1,110 @@
+focus		- Actions when element get focus.
+blur		- Actions when element looses focus.
+cut 		- On Cut
+copy		- On Copy
+paste		- On Paste
+contextmenu	- On Right Click
+click		- On Click
+dblclick		- On Double Click
+select		- On Selection Start
+change		- On value Change
+submit		- On Form submit
+
+
+Task : Create a Page [Your HTML Component] and disable copy cut and right click options.
+
+
+Ex:
+<script>
+     function disablerightclick() {
+          return false;
+     }
+    document.oncontextmenu = function() { 
+	return false;
+       }
+</script>
+<body oncontextmenu="disablerightclick()" onselectionstart="return false" onselectstart="return false" onselect="return false" oncopy="return false">
+ <h2> Selection, Right Click , Copy are Disabled on this Page </h2>
+</body>
+
+
+Ex: EventsDemo
+
+1.  .ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-eventsdemo',
+  templateUrl: './eventsdemo.component.html',
+  styleUrls: ['./eventsdemo.component.css']
+})
+export class EventsdemoComponent {
+   public msg = '';
+   public txtName = '';
+   public onNameFocus(){
+      this.msg = 'Name in Block Letters Only';
+   }
+   public onNameBlur() {
+      this.msg = '';
+      this.txtName = this.txtName.toUpperCase();
+   }
+   public onCut(){
+     this.msg = 'Removed and Copied to ClipBoard';
+   }
+   public onCopy(){
+     this.msg = 'Copied to Clipboard';
+   }
+   public onPaste(){
+     this.msg = 'Inserted from Clipboard';
+   }
+}
+
+
+2.  ".html"
+
+<div class="container">
+  <div class="form-group">
+    <label>User Name</label>
+    <div>
+        <input type="text" [(ngModel)]="txtName" (focus)="onNameFocus()" (blur)="onNameBlur()" (cut)="onCut()" (copy)="onCopy()" (paste)="onPaste()" class="form-control" placeholder="Name in Block Letters">
+        <span>{{msg}}</span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="form-group">
+     <img (dblclick)="ondblClick()" src="assets/shoe.jpg" width="50" height="50">
+     <label>Double Click on Image to View Large</label>
+  </div>
+
+public ondblClick(){
+     window.open('assets/shoe.jpg', 'shoe', 'width=800 height=500');
+   }
+
+ 		Submit
+ - Submit is an Javascript event used for "<form>" element.
+ - Submit event firesup only on "submit button" click.
+
+	<button	type="button">
+	<button	type="submit">
+	<button	type="reset">
+	<button>   default it is submit.
+
+EX:
+
+<form (submit)="onSubmit()">
+
+  <button>SUbmit </button>
+
+</form>
+
+public onSubmit(){
+     alert('Form Submitted');
+   }
+
+
+		Custom Events
+		Component Hierarchy
