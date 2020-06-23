@@ -1,0 +1,72 @@
+		Component Hierarchy
+- How to access a component in another component?
+  * Component is just like a re-usable element in Angular 
+  * You can use its selector to access and render its output in any another component.
+
+Syntax:
+	<parent-component>
+	       <child-component>
+	       </child-component>
+	</parent-component>
+
+- How data is transported from one component to another?
+ * The child component is defined with a property marked as "@Input()". So that it can access the value from parent and render in child.
+
+Ex:
+1. Add following component
+	> ng g  c  parent  --skipTests
+	> ng g c  child --skipTests
+
+2. parent.component.ts
+
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent{
+   public parentMsg = 'Hello ! from Parent';
+
+}
+
+3. parent.component.html
+
+<div class="container" style="background-color: lightcyan; border:2px solid darkcyan; padding: 20px;">
+  <h2>Parent Component</h2>
+  <app-child [msg]="parentMsg" ></app-child>
+</div>
+
+4. child.component.ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent{
+  @Input() public msg;
+}
+
+
+5. child.component.html
+
+<div style="background-color: yellow; border:2px dotted red">
+    <h2>Child Component</h2>
+    <p>{{msg}}</p> 
+</div>
+
+
+
+- How to define custom events for a component?
+  * Events used by Angular are all from JavaScript library i.e all are browser events.
+  * EventEmitter  is base for all events in Angular.
+  * You can create a custom event by implementing EventEmitter base.
+  * It Emits the value by using a custom method, which you can access in another component.
+
+
+
+
+
