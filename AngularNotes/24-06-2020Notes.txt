@@ -1,0 +1,116 @@
+	         Custom Events for Component
+- Every component is just like a re-usable element.
+- It is defined with presentation and logic.
+- You can inject component into any another component or page.
+- A component can be defined with an event, so that it can perform actions on event.
+- You can create custom event by implementing "EventEmitter". It is the base class for events.
+
+
+Ex:
+1. Add Components:
+	> ng g c  productsdata --skipTests=true
+	> ng g c  filter --skipTests=true
+
+2. productsdata.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-productsdata',
+  templateUrl: './productsdata.component.html',
+  styleUrls: ['./productsdata.component.css']
+})
+export class ProductsdataComponent{
+  public products = [
+    {Name: 'JBL Speaker', Price: 3000.44, Photo: 'assets/jblspeaker.jpg', Category: 'Electronics'},
+    {Name: 'Earpods', Price: 5000.44, Photo: 'assets/earpods.jpg', Category: 'Electronics'},
+    {Name: 'Nike Casuals', Price: 7000.44, Photo: 'assets/shoe.jpg', Category: 'Footwear'},
+    {Name: 'T-Shirt', Price: 2000.44, Photo: 'assets/tshirt.jpg', Category: 'Fashion'},
+    {Name: 'Jeans', Price: 4000.44, Photo: 'assets/jeans.jpg', Category: 'Fashion'}
+  ];
+  public allCount = this.products.length;
+  public Ecount = this.products.filter(x=>x.Category=='Electronics').length;
+  public footCount = this.products.filter(x=>x.Category=='Footwear').length;
+  public fashionCount = this.products.filter(x=>x.Category=='Fashion').length;
+
+  public categoryName = 'All';
+  public CategoryChanged(catName) {
+    this.categoryName = catName;
+  }
+
+}
+
+4. productsdata.component.html
+
+<div class="container-fluid">
+  <h2 class="text-primary text-center">Amazon Shopping</h2>
+  <div class="row">
+   <div class="col-3">
+     <app-filter (FilterCategoryChanged)="CategoryChanged($event)" [AllCount]="allCount" [ElectronicsCount]="Ecount" [FootwearCount]="footCount" [FashionCount]="fashionCount" ></app-filter>
+   </div>
+   <div class="col-9">
+     <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Preview</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let product of products">
+                <tr *ngIf="categoryName=='All' || categoryName==product.Category">
+                    <td>{{product.Name}}</td>
+                    <td>{{product.Price}}</td>
+                    <td><img [src]="product.Photo" width="50" height="50"></td>
+                </tr>
+            </ng-container>
+        </tbody>
+     </table>
+   </div>
+  </div>
+</div>
+
+5. filter.component.ts
+
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+
+
+@Component({
+  selector: 'app-filter',
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.css']
+})
+export class FilterComponent  {
+  @Input() public AllCount;
+  @Input() public ElectronicsCount;
+  @Input() public FootwearCount;
+  @Input() public FashionCount;
+
+  public selectedCategoryName = 'All';
+
+  @Output() public FilterCategoryChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  public CategoryChanged(){
+    this.FilterCategoryChanged.emit(this.selectedCategoryName);
+  }
+
+}
+
+
+6. filter.component.html
+
+<div>
+    <h3>Filter Products</h3>
+    <div class="form-group">
+        <label>Choose Category</label>
+        <select [(ngModel)]="selectedCategoryName" (change)="CategoryChanged()" class="form-control">
+            <option value="All">All [{{AllCount}}] </option>
+            <option value="Electronics">Electronics [{{ElectronicsCount}}]</option>
+            <option value="Footwear">Footwear [{{FootwearCount}}] </option>
+            <option value="Fashion">Fashion [{{FashionCount}}]</option>
+        </select>
+    </div>
+</div>
+
+
