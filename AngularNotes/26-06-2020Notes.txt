@@ -1,0 +1,48 @@
+                      Component Life Cycle [Hooks]
+- A component starts , executes and destroys memory.
+- Angular creates a component on request.
+- It renders the component to client.
+- It identifies the changes in component properties and values.
+- It updates the changes.
+- It will destroy the memory allocated for component.
+- Every Angular component handle the functionality by using following events, which are known as Life Cycle Hooks.
+
+	                 Life Cycle Events
+	-Constructor
+	 |_ngOnChanges : when an input/output binding
+	 |	              value changes.
+	 |_ngOnInit           : After the first ngOnChanges.
+	 |_ngDoCheck      : Developers Custom change
+	 |  |	              detection.
+	 |  |_ngAfterContentInit
+	 |  |_ngAfterContentCheck
+	 |  |_ngAfterViewInit
+	 |  |_ngAfterViewChecked
+	 |_ngOnDestroy   : Just before the directive is
+		              destroyed.
+
+
+ngAfterContentInit:  It is the event that fires up after the
+		initialization of component completed
+		
+ngAfterContentChecked: It is the event that fires up after
+		        checking every change.
+
+ngAfterViewnit  : It is the event that fires up after the 
+	            component views [.html] are initialized.
+
+ngAfterViewChecked: It is the vent that fires up after every
+		   check of a component view identifed.
+
+
+First - Constructor
+Second - ngOnChanges
+Third  - ngOnInit
+ Fourth - ngDoCheck
+ Five  - ngDestroy
+
+
+
+
+
+
