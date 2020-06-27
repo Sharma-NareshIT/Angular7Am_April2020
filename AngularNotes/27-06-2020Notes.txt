@@ -1,0 +1,96 @@
+ngModel 
+-  2 Way Binding
+- Get the data from property and binds to element View.
+- It identifes the changes in View and updates to the property.
+- ngModel uses property and event binding  "[(ngModel)]"
+- Model is "Single-Source-of-Truth".
+- It comprises of information before change and after change
+  [previous value and current value].
+- It is controlled by using Component Life cycle Hook "OnChanges" with "ngOnChanges()" event.
+- OnChanges can use "SimpleChanges", which contains information about the previous value and current value.
+- If previous value is not same as current value then model update the value.
+- SimpleChanges reference object provide access to 
+	a) perviousValue	
+	b) currentValue
+	c) firstChange   : true on binding and false when
+		            change occured
+	d) IsFirstChange
+
+- OnChanges - Binds the property and updates the changes
+	        
+FAQ: How model updates the changes?
+A. By using property and event binding techniques.
+
+FAQ: Which event Model uses to identify the changes?
+A.  Model uses life cycle hook "ngOnChanges()"
+
+FAQ: Which object contains information about changes?
+A.
+      SimpleChanges object will provide information about 
+      Previous and Current value.
+
+
+EX:
+1. parent.component.ts
+
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent{
+   public parentMsg = 'Hello ! from Parent';
+   public userName = 'John';
+}
+
+2. parent.component.html
+
+<div class="container" style="background-color: lightcyan; border:2px solid darkcyan; padding: 20px;">
+  <h2>Parent Component</h2>
+  <input [(ngModel)]="userName" type="text" class="form-control" style="margin-bottom: 20px;">
+  <app-child [userName]="userName" ></app-child>
+</div>
+
+3. child.component.ts
+
+import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnChanges{
+  @Input() public userName;
+  public currentvalue;
+  public previousvalue;
+  public isFirstChange;
+  ngOnChanges(changeObj: SimpleChanges){
+    for(var property in changeObj) {
+       let prop = changeObj[property];
+       this.currentvalue = prop.currentValue;
+       this.previousvalue = prop.previousValue;
+       this.isFirstChange = prop.firstChange;
+    }
+  }
+}
+
+4. child.component.html
+
+<div style="background-color: yellow; border:2px dotted red; padding: 30px;">
+    <h2>Child Component</h2>
+    <p>Hello ! {{userName}}</p>
+    <dl>
+        <dt>Previous Value</dt>
+        <dd>{{previousvalue}}</dd>
+        <dt>Current Value</dt>
+        <dd>{{currentvalue}}</dd>
+        <dt>Is First Change</dt>
+        <dd>{{isFirstChange}}</dd>
+    </dl>
+</div>
+
+
+
