@@ -1,0 +1,69 @@
+		Angular Pipes
+		============
+- Angular have to present data that comes from various data sources.
+- The datatype supported by angular is not similar as the data source provided to application.
+- The data will not be presented in the same format that we are expecting.
+- You can transform the data into various formats by using "Angular Pipes".
+	"Transforming Data using Angular Pipes"
+- Pipe is a TypeScript class which implements "PipeTransform" base class.
+- Pipe provide a "transform()" method that transforms your data.
+- Pipes are used to transforms and format strings, currency, dates and other display data.
+- Pipes are uses on template expressions by using "|"
+
+	{{ yourData | pipeName | pipeName }}
+
+- Based on when a pipe is applied to data, Pipes are categorized into 2 groups
+	a) Pure Pipe
+	b) Impure Pipe
+- Pure pipe is the pipe which applies the transformation when any change detected in value or by passing a parameter into pipe.
+
+- Impure pipe is the pipe that applies the transformation on every change instead of verifying the parameter.
+
+- Angular provides several built-in Pipes and also allows to create custom pipes
+
+	        "Angular Built - in Pipes"
+
+- AsyncPipe
+- CurrencyPipe
+- DatePipe
+- DecimalPipe
+- I18nPluralPipe
+- I18nSelectPipe
+- JsonPipe
+- KeyValuePipe
+- LowerCasePipe
+- UpperCasePipe
+- TitleCasePipe
+- PercentPipe
+- SlicePipe
+
+
+1. UpperCasePipe  : It converts all letters into uppercase.
+2. LowerCasePipe  : It converts all letters into lowercase.
+3. TitleCasePipe     : It converts every word first letter into
+		uppercase.
+
+   Syntax:
+	{{ yourData | uppercase }}
+	{{ yourData | lowercase }}
+	{{ yourData | titlecase }}
+
+4. DecimalPipe :  It is used to display numeric value with
+	            thousands separator and fractions.
+	            Decimal Pipe reference name is "number".
+
+Syntax:
+{{ data | number:{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+
+EX:
+	public price = 45000.40;
+
+	{{ price }}   		// 45000.4
+	{{ price | number }}		// 45,000.4
+	{{pirce | number: '5.2-2' }}        //  45,000.40
+
+
+
+
+
+
