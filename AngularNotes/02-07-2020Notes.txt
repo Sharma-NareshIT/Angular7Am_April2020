@@ -1,0 +1,92 @@
+		I18PluralPipe
+- As per coding standards we use plural name for collection.
+- The plural pipe can identify the count of values in a collection and can return a plural name for collection.
+- It get the count of values in a collection and can display messages according to the count. [singular, plural names ]
+
+Syntax:
+{{ collection.length | i18pluralpipe:keyValueCollection }}
+
+ KeyValueCollection - can be a map or object, it contains
+		   messages to display.
+ length is verified and relative message is displayed.
+ It matches the length with the key in collection.
+
+
+Ex:
+1. Goto  "pipedemo.component.ts"
+
+export class PipedemoComponent{
+   public notifications = ['FaceBook Updated', 'Memory Cleaned', 'OS Updated'];
+
+   public notificationsMap: {[key:string]:string} = {
+     '=0': 'No Notifications', '=1': 'One Notification', 'other': '# Notifications'
+   };
+}
+
+2. Goto "pipedemo.component.html"
+
+<div class="form-group">
+    <button class="btn btn-primary">
+        <span class="badge badge-light">
+          {{notifications.length | i18nPlural:notificationsMap}}
+        </span>
+    </button>
+  </div>
+
+
+uppercase 
+lowercase
+titlecase
+decimal
+currency
+i18nPlural
+i18select
+jsonpipe
+date etc..
+
+		Custom Pipe
+- Pipe is TypeScript class that implements "PipeTransform" base.
+- Pipe requires a name , which is defined by using "Pipe" decorator.
+- Pipe requres a functionality to return, which is defined by using "transform()"
+
+1. Goto "app" folder and add a new file
+	 "sentencecase.pipe.ts"
+
+import { PipeTransform, Pipe } from '@angular/core';
+
+@Pipe({
+    name: 'sentencecase'
+})
+
+export class SentenseCasePipe implements PipeTransform {
+    transform(str){
+        let firstChar = str.charAt(0);
+        let restChars = str.substring(1);
+        let sentence = firstChar.toUpperCase() + restChars.toLowerCase();
+        return sentence;
+    }
+}
+2. Goto "app.module.ts"  
+
+declarations : [
+	SentencePipe
+	]
+3. Goto pipedemo.component.ts
+   
+    public  msg = 'welcome TO ANGular piPES';
+
+4. Goto pipedemo.component.html
+ 
+     {{msg | sentencecase}}
+
+
+	             Angular Services
+- Service configures pre-defined business logic.
+- It allows reusability of functions.
+- Service is a collection of related type of functions.
+       [functions → factory → service ]
+- You can inject service into any component and use the functionality.
+- Service uses "singleton" pattern.
+
+	           Angular Forms
+	          Angular Routing
