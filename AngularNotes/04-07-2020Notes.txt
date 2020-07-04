@@ -1,0 +1,141 @@
+		Angular Forms
+- Form is a container that comprises of set of controls, which allows interaction with our application.
+- It handles operations live View, Edit, Input and Delete.
+- HTML form comprises of elements like buttons, textbox, checkbox, radio, dropdown etc.
+- Angular makes form dynamic to handle client side interactions.
+- Angular supports 2 types of Forms
+	1. Template Driven Form	
+	2. Model Driven Form / Reactive Form
+
+	         Template Driven Form
+	         --------------------------------
+1. These are the Angular forms whose interactions are handled at View Level.
+2. Configuration and Manipulation all are controlled at View level.
+3. Very less controller level interaction.
+4. These forms are heavy on page and take more time to render. Hence slow.
+5. Hard to test and extend
+6. Good for component which are desinged by using inline technique.
+7. You can use template driven forms when you are designing an interface that doesn't require regular extentions.
+8. The directives that are used to configure form and form elements in Template Driven apporach are
+	a) NgForm
+	b) NgModel
+NgForm → It provides set of properties and methods that
+	  are used to control <form> element.
+
+NgModel →It provides set of properties and method that
+	  are used to control elements in form i.e like
+	  input, textarea, select etc..
+
+These directives are available with "FormsModule" of "@angular/forms" library.
+
+Syntax:
+        <form  #formName="ngForm">
+           <input type="text" #txtName="ngModel" ngModel name="txtName">
+        </form>
+
+{{formName.value}}  It returns an object that contains
+		 key-value collection of all controls
+		 in the form and their values.
+
+{{formName.pristine, dirty, valid, invalid, submitted }}
+
+ {{txtName.value}}      It returns the value entered in textbox
+
+ {{txtName.pristine, dirty, valid, invalid, touched, untoched}}
+
+
+
+Ex:
+1. Add a new component
+	> ng g c  templateform 
+
+2. templateform.component.ts
+
+export class TemplateformComponent {
+   public formData;
+   public SubmitClick(obj){
+      this.formData = obj;
+   }
+}
+
+3. templateform.component.html
+
+<div class="container">
+ <h2>Template Driven Form</h2>
+ <form #frmRegister="ngForm" (submit)="SubmitClick(frmRegister.value)">
+     <div class="form-group">
+        <label>Name</label>
+        <div>
+            <input #txtName="ngModel" ngModel type="text" name="txtName" class="form-control">
+        </div>
+     </div>
+     <div class="form-group">
+        <label>Price</label>
+        <div>
+            <input #txtPrice="ngModel" ngModel type="text" name="txtPrice" class="form-control">
+        </div>
+     </div>
+     <div class="form-group">
+        <label>Quantity</label>
+        <div>
+            <input #txtQty="ngModel" ngModel type="number" min="1" max="4" name="txtQty" class="form-control">
+        </div>
+     </div>
+     <div class="form-group">
+        <label>Shipped To</label>
+        <div>
+           <select #lstCities="ngModel" ngModel class="form-control" name="lstCities">
+               <option>Delhi</option>
+               <option>Hyderabad</option>
+           </select>
+        </div>
+     </div>
+     <div class="form-group">
+        <button class="btn btn-primary btn-block">Submit</button>
+     </div>
+ </form>
+</div>
+<div class="container">
+   <h2>Form Data</h2>
+   <div>
+       <dl>
+           <dt>Name</dt>
+           <dd>{{frmRegister.value.txtName}}</dd>
+           <dt>Price</dt>
+           <dd>{{frmRegister.value.txtPrice}}</dd>
+           <dt>Shipped To</dt>
+           <dd>{{frmRegister.value.lstCities}}</dd>
+           <dt>Total</dt>
+           <dd>{{frmRegister.value.txtPrice * frmRegister.value.txtQty}}</dd>
+       </dl>
+       <div>
+           <pre>
+               {{formData|json}}
+           </pre>
+       </div>
+   </div>
+</div>
+<div class="container">
+    <h2>Controls Data</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{txtName.value}}</dd>
+        <dt>Price</dt>
+        <dd>{{txtPrice.value}}</dd>
+        <dt>Shipped To</dt>
+        <dd>{{lstCities.value}}</dd>
+        <dt>Total</dt>
+        <dd>{{txtPrice.value * txtQty.value}}</dd>
+    </dl>
+</div>
+
+4. templateform.component.css
+
+.container {
+    width:400px;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-left: 50px;
+}
