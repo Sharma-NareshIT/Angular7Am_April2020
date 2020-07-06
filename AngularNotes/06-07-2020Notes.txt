@@ -1,0 +1,137 @@
+		Form Validation
+- Validation is the process of verifying user input.
+- Validation is required to ensure that contradictionary and unauthorized data is not get stored into database.
+- Angular provides a set of services to handle validation client side.
+- Angular Validation services will make use of HTML validations like : required, minlength, maxlength, pattern, email, url etc..
+         <input type="email" minlength="10" maxlength="15" pattern="[A-Z]{10,15}" required>
+
+- Validation Services are categoried into 2 groups
+	a) Form State Validation Services
+	b) Input State Validation Services
+
+Form State Validation : It validates all controls in a form simultaneously at the same time. These services are provided by "NgForm" module.
+
+Service		Property		Description
+---------------------------------------------------------------------------------------
+ngPristine	pristine	 It returns true when form 
+			 elements are never modified.
+			 No element in the form have
+			 changed its value.
+
+ngDirty		ditry	It returns true when any one
+			field changed its value.
+			When form is modified.
+
+ngValid		valid	It returns true when all fields
+			in the form are valid.
+
+ngInvalid		invalid	It returns true when any one
+			field is invalid.
+
+ngSubmitted	submitted  It returns true when form
+			  submitted.
+
+Syntax:
+	frmRegister.invalid
+	frmRegister.valid
+
+
+Ex:
+1. Add a new component
+	> ng g c  formvalidation --skipTests=true
+
+2. formvalidation.component.html
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-3">
+    <h2>Register User</h2>
+ <form #frmRegister="ngForm" >
+  <div class="form-group">
+    <label>User Name</label>
+    <div>
+        <input name="txtName" ngModel #txtName="ngModel" type="text" class="form-control" required minlength="4">
+    </div>
+  </div>
+  <div class="form-group">
+      <label>Mobile</label>
+    <div>
+        <input name="txtMobile" ngModel #txtMobile="ngModel" type="text" class="form-control" pattern="\+91[0-9]{10}" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <button [disabled]="frmRegister.invalid" class="btn btn-primary">Register</button>
+    <button [disabled]="frmRegister.pristine" class="btn btn-success">Save</button>
+  </div>
+ </form>
+  </div>
+  <div class="col-9">
+    <h2>Validation Services</h2>
+    <table class="table table-hover">
+        <tr>
+            <td>Pristine [Form Not Modified]</td>
+            <td>{{frmRegister.pristine}}</td>
+        </tr>
+        <tr>
+            <td>Dirty [Form Modified]</td>
+            <td>{{frmRegister.dirty}}</td>
+        </tr>
+        <tr>
+            <td>Valid [All Fields Valid]</td>
+            <td>{{frmRegister.valid}}</td>
+        </tr>
+        <tr>
+            <td>Invalid [Any one Field Invalid]</td>
+            <td>{{frmRegister.invalid}}</td>
+        </tr>
+        <tr>
+            <td>Submitted [Form Submitted]</td>
+            <td>{{frmRegister.submitted}}</td>
+        </tr>
+    </table>
+  </div>
+</div>
+</div>
+
+3. formvalidation.component.css
+
+.col-3 {
+    border-right: 2px dotted darkcyan;
+}
+button:disabled {
+    cursor:not-allowed;
+}
+button:enabled {
+    cursor:grab;
+}
+
+	          Input State Validation Services
+- These are angular validation services used to verify validation of every element individually.
+
+Service		Property
+---------------------------------------------
+ngPristine	pristine
+ngDirty		dirty
+ngValid		valid	
+ngInvalid		invalid
+ngTouched	touched [focus]
+ngUntouched	untouched
+errors		errors
+
+Syntax:
+	txtName.invalid
+	txtName.pristine
+
+Ex:
+ <div>
+        <input name="txtName" ngModel #txtName="ngModel" type="text" class="form-control" required>
+        <span class="text-danger" *ngIf="txtName.touched && txtName.invalid" >Name Required</span>
+    </div>
+
+
+
+
+
+
+
+
