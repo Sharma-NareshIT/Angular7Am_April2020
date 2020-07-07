@@ -1,0 +1,150 @@
+errors : It is a validation property used to verify specific
+             validation error in given set of errors.
+
+Syntax:
+ <div  *ngIf="txtName.invalid">
+   <span  *ngIf="txtName.errors.required"> Required </span>
+   <span  *ngIf="txtName.errors.pattern"> Pattern </span>
+</div>
+
+
+Ex: inputvalidation.component.html
+
+<div class="container-fluid">
+  <h2>Register User</h2>
+  <form #frmRegister="ngForm">
+    <div class="form-group">
+        <label>User Name</label>
+        <div>
+            <input type="text" name="txtName" ngModel #txtName="ngModel" class="form-control" required minlength="4">
+            <div class="text-danger" *ngIf="frmRegister.submitted && txtName.invalid">
+                <span *ngIf="txtName.errors.required">Name Required</span>
+                <span *ngIf="txtName.errors.minlength">Name too short</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Mobile</label>
+        <div>
+            <input type="text" name="txtMobile" ngModel #txtMobile="ngModel" class="form-control" required pattern="\+91[0-9]{10}">
+            <div class="text-danger" *ngIf="frmRegister.submitted && txtMobile.invalid">
+                <span *ngIf="txtMobile.errors.required">Mobile Required</span>
+                <span *ngIf="txtMobile.errors.pattern">Invalid Mobile</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary btn-block">Register</button>
+    </div>
+  </form>
+</div>
+
+		 Custom Validation
+- You can write a validation function to verify the input value.
+- You can conditionally display error message.
+
+EX:
+1. inputvalidation.component.ts
+
+import { Component} from '@angular/core';
+
+@Component({
+  selector: 'app-inputvalidation',
+  templateUrl: './inputvalidation.component.html',
+  styleUrls: ['./inputvalidation.component.css']
+})
+export class InputvalidationComponent {
+  public displayCityError = true;
+  public displayEvenError = false;
+  public OnCityChanged(val) {
+     if(val == 'nocity') {
+        this.displayCityError = true;
+     } else {
+       this.displayCityError = false;
+     }
+  }
+  public ValidateEvenNumber(val) {
+      if(val % 2 == 0) {
+        this.displayEvenError = false;
+      } else {
+        this.displayEvenError = true;
+      }
+  }
+}
+
+2. inputvalidation.component.html
+
+<div class="container-fluid">
+  <h2>Register User</h2>
+  <form #frmRegister="ngForm">
+    <div class="form-group">
+        <label>User Name</label>
+        <div>
+            <input type="text" name="txtName" ngModel #txtName="ngModel" class="form-control" required minlength="4">
+            <div class="text-danger" *ngIf="frmRegister.submitted && txtName.invalid">
+                <span *ngIf="txtName.errors.required">Name Required</span>
+                <span *ngIf="txtName.errors.minlength">Name too short</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Mobile</label>
+        <div>
+            <input type="text" name="txtMobile" ngModel #txtMobile="ngModel" class="form-control" required pattern="\+91[0-9]{10}">
+            <div class="text-danger" *ngIf="frmRegister.submitted && txtMobile.invalid">
+                <span *ngIf="txtMobile.errors.required">Mobile Required</span>
+                <span *ngIf="txtMobile.errors.pattern">Invalid Mobile</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Select City</label>
+        <div>
+            <select (change)="OnCityChanged(lstCities.value)" name="lstCities" ngModel #lstCities="ngModel" class="form-control">
+               <option value="nocity">Choose Your City</option> 
+               <option value="Delhi">Delhi</option>
+               <option value="Hyd">Hyd</option>
+            </select>
+        </div>
+        <span *ngIf="displayCityError" class="text-danger">Please Select a City</span>
+    </div>
+    <div class="form-group">
+        <label>Enter Even Number</label>
+        <div>
+            <input (blur)="ValidateEvenNumber(txtEven.value)" type="text" name="txtEven" ngModel #txtEven="ngModel" class="form-control">
+        </div>
+        <span *ngIf="displayEvenError" class="text-danger">Not an Even Number</span>
+    </div>
+    <div>
+        <button class="btn btn-primary btn-block">Register</button>
+    </div>
+  </form>
+</div>
+
+	 Angular CSS Validation Classes 
+- Angular provides a set of CSS validation classes.
+- These classes can identify the validation state and apply effects.
+
+ClassName	Description
+=================================================
+.ng-valid		]
+.ng-invalid	]
+.ng-pristine	]  Apply effects on specific state
+.ng-dirty		]
+.ng-touched	]
+.ng-untouched	]
+
+
+EX:
+inputvalidation.component.css
+
+input.ng-valid {
+    border:2px solid green;
+}
+input.ng-invalid {
+    border:2px solid red;
+}
+	or
+input:valid { }
+input:invalid { }
+
