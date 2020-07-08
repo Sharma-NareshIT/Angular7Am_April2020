@@ -1,0 +1,221 @@
+              Reactive Forms or Model Driven Forms
+- Recative forms provide Model driven approach.
+- The forms are bound to the Model, hence the model changes are updated to view.
+- Tempalte driven forms are not bound to model.
+- Reactive forms configure form controls at application logic level.
+- Easy to extend and loosely coupled.
+- Reactive forms are easy to test, clean separation of implentation and design.
+- Reactive forms are asynchronous, they allow to submit only a specific portion of form.
+- They support Partial Updates.
+- Library required is "ReactiveFormsModule" and "FormsModules" from "@angular/forms.
+
+	          "app.module.ts"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+ imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+
+	           Configure a Form Control
+	           -------------------------------------
+- FormControl is the base for creating form elements.
+
+Syntax:
+    public elementName = new FormControl('value');
+
+- FormControl is bound to HTML element by using "formControl" property.
+
+     <input type="text"  [formControl]="elementName">
+
+- The value for formControl can be update dynamically by using functions
+	a) setValue()
+	b) patchValue()
+
+Syntax:
+         this.elementName.setValue('someValue');
+
+Ex:
+1. reactivedemo.component.ts
+
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-reactivedemo',
+  templateUrl: './reactivedemo.component.html',
+  styleUrls: ['./reactivedemo.component.css']
+})
+export class ReactivedemoComponent{
+  public txtName = new FormControl('');
+  public lstCities = new FormControl('');
+  public UpdateClick(){
+    this.txtName.setValue('Samsung TV');
+    this.lstCities.setValue('Hyd');
+  }
+}
+
+
+2. reactivedemo.component.html
+
+<div class="container">
+  <div class="box">
+    <h2>Register Product</h2>
+    <div class="form-group">
+      <label>Name</label>
+      <div>
+          <input [formControl]="txtName" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Select City</label>
+      <div>
+          <select [formControl]="lstCities" class="form-control">
+              <option>Delhi</option>
+              <option>Hyd</option>
+          </select>
+      </div>
+    </div>
+    <div class="form-group">
+        <button (click)="UpdateClick()" class="btn btn-primary btn-block">Update</button>
+    </div>
+  </div>
+  <div class="box">
+     <h2>Details</h2>
+     <dl>
+         <dt>Name</dt>
+         <dd>{{txtName.value}}</dd>
+         <dt>City</dt>
+         <dd>{{lstCities.value}}</dd>
+     </dl>
+  </div>
+</div>
+
+3. reactivedemo.component.css
+
+.box {
+    float: left;
+    width: 300px;
+    margin-left: 50px;
+}
+
+Creating and Configuring Forms and Netsted Forms:
+- You can dynamically create a form and add to UI.
+- It allows to extend the form and make it asynchronous.
+- You can create a form by using "FormGroup" base.
+- FormGroup is a collection of FormControls.
+
+Syntax:
+      public parentForm = new FormGroup({
+	control:  new FormControl(' '),
+	childForm: new formGroup({
+	     control: new FormControl(' ')
+	})
+      });
+
+- To bind with UI you have to use
+	a) formGroup	- Parent Form
+	b) formGroupName	- Child Form
+
+            <form [formGroup]="parentForm">
+               <div formGroupName="childForm">
+               </div>
+            </form>
+
+- The form controls in a formGroup are bound to HTML Elements by using "formControlName" attribute.
+
+          <input type="text" formControlName="control">
+
+- setValue() is used to set value into any element.
+- patchValue() it configures asynchronous binding.
+
+Ex:
+1. nestedform.component.ts
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-nestedform',
+  templateUrl: './nestedform.component.html',
+  styleUrls: ['./nestedform.component.css']
+})
+export class NestedformComponent{
+   public frmRegister = new FormGroup({
+      Name: new FormControl(''),
+      Price: new FormControl(''),
+      frmDetails: new FormGroup({
+        City: new FormControl(''),
+        InStock: new FormControl('')
+      })
+   });
+   public UpdatePartial() {
+      this.frmRegister.patchValue({
+        Name: 'Samsung TV',
+        frmDetails: {
+          City: 'Delhi',
+          InStock: true
+        }
+      });
+   }
+}
+
+
+2. nestedform.component.html
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <h2>Register Product</h2>
+      <form [formGroup]="frmRegister">
+        <fieldset>
+            <legend>Basic Info</legend>
+            <dl>
+                <dt>Name</dt>
+                <dd><input formControlName="Name" type="text" class="form-control"></dd>
+                <dt>Price</dt>
+                <dd><input formControlName="Price" type="text" class="form-control"></dd>
+            </dl>
+        </fieldset>
+        <fieldset>
+            <legend>Stock Details</legend>
+            <div formGroupName="frmDetails" >
+                <dl>
+                    <dt>City</dt>
+                    <dd>
+                        <select formControlName="City" class="form-control">
+                            <option>Delhi</option>
+                            <option>Hyd</option>
+                        </select>
+                    </dd>
+                    <dt>In Stock</dt>
+                    <dd>
+                        <input type="checkbox" formControlName="InStock"> Yes
+                    </dd>
+                </dl>
+            </div>
+        </fieldset>
+        <button (click)="UpdatePartial()" class="btn btn-primary btn-block">Update</button>
+      </form>
+    </div>
+    <div class="col-9">
+        <h2>Product Details</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd>{{frmRegister.value.Name}}</dd>
+            <dt>Price</dt>
+            <dd>{{frmRegister.value.Price}}</dd>
+            <dt>City</dt>
+            <dd>{{frmRegister.value.frmDetails.City}}</dd>
+            <dt>In Stock</dt>
+            <dd>
+                {{(frmRegister.value.frmDetails.InStock==true)?"Available":"Out of Stock"}}
+            </dd>
+        </dl>
+    </div>
+  </div>
+</div>
+
+
+
