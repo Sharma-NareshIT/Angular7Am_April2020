@@ -1,0 +1,190 @@
+	   FormBuilder in Reactive Forms
+	   ==========================
+- FormBuilder is a service provided by angular to configure forms and its elements dynamically.
+- FormBuilder uses a singleton pattern.
+- FormBuilder provides the methods
+	a) Group()
+	b) Control()
+	c) Array()
+- Group()  configures a form group.
+- Control() configures a form control().
+- Array() configure a collection of controls, which allow to dynamically add or remove controls.
+- The properties used for element in FormBuilder to bind with the UI
+	a) formGroup	: Parent Form
+	b) formGroupName	: Child Form
+	c) formControlName : Elements in Forms
+
+Ex:
+1. formbuilderdemo.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+
+
+@Component({
+  selector: 'app-formbuilderdemo',
+  templateUrl: './formbuilderdemo.component.html',
+  styleUrls: ['./formbuilderdemo.component.css']
+})
+export class FormbuilderdemoComponent implements OnInit {
+
+  constructor(private fb: FormBuilder) { }
+  public frmRegister = this.fb.group({
+    Name: [''],
+    Price: [''],
+    frmDetails : this.fb.group({
+      City: [''],
+      InStock: ['']
+    })
+  });
+  ngOnInit(): void {
+  }
+
+}
+
+2. formbuilderdemo.component.html
+
+<div class="container">
+ 
+ <form [formGroup]="frmRegister">
+    <h2>General Details</h2>
+   <dl>
+       <dt>Name</dt>
+       <dd>
+           <input type="text" formControlName="Name" >
+       </dd>
+       <dt>Price</dt>
+       <dd>
+           <input type="text" formControlName="Price">
+       </dd>
+   </dl>
+   <h2>Stock Details</h2>
+   <div formGroupName="frmDetails">
+      <dl>
+          <dt>City</dt>
+          <dd>
+              <select formControlName="City">
+                  <option>Delhi</option>
+                  <option>Hyd</option>
+              </select>
+          </dd>
+          <dt>InStock</dt>
+          <dd>
+              <input type="checkbox" formControlName="InStock"> Yes
+          </dd>
+      </dl>
+   </div>
+ </form>
+  <div>
+    <h2>Details</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd>
+            {{frmRegister.value.Name}}
+        </dd>
+        <dt>Price</dt>
+        <dd>
+            {{frmRegister.value.Price}}
+        </dd>
+        <dt>City</dt>
+        <dd>
+            {{frmRegister.value.frmDetails.City}}
+        </dd>
+        <dt>Stock</dt>
+        <dd>
+            {{(frmRegister.value.frmDetails.InStock)==true?"Available":"Out of Stock"}}
+        </dd>
+    </dl>
+  </div>
+</div>	 
+
+		FormArray & FormControl
+		======================
+- FormArray allows to add or remove controls dynamically.
+- It uses FormBuilder method "array()"
+- You can use array functions to add or remove elements into form array, like  shift(), pop(), unshift(), push() etc..
+
+  Syntax:
+       this.formArray.push(this.fb.control());
+       this.formArray.removeAt(index);
+
+- FormGroup requires to use "array()" for adding and removing controls dynamically.
+
+Ex:
+1. dynamicform.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormArray } from '@angular/forms';
+
+@Component({
+  selector: 'app-dynamicform',
+  templateUrl: './dynamicform.component.html',
+  styleUrls: ['./dynamicform.component.css']
+})
+export class DynamicformComponent implements OnInit {
+
+  constructor(private fb: FormBuilder) { }
+  public frmRegister = this.fb.group({
+    Name: [''],
+    Price: [''],
+    frmDetails: this.fb.group({
+      City: [''],
+    }),
+    newControls: this.fb.array([
+      this.fb.control('')
+    ])
+  });
+  get newControls() {
+    return this.frmRegister.get('newControls') as FormArray;
+  }
+  public AddPhoto() {
+    this.newControls.push(this.fb.control(''));
+  }
+  public RemovePhoto(i) {
+    this.newControls.removeAt(i);
+  }
+  ngOnInit(): void {
+  }
+
+}
+
+2. dynamicform.component.html
+
+<div class="container">
+  <h2>Register Product</h2>
+  <form [formGroup]="frmRegister">
+    <dl>
+        <dt>Name</dt>
+        <dd>
+            <input type="text" formControlName="Name">
+        </dd>
+        <dt>Price</dt>
+        <dd>
+            <input type="text" formControlName="Price">
+        </dd>
+    </dl>
+    <h3>Stock Details</h3>
+    <div formGroupName="frmDetails">
+        <dl>
+            <dt>City</dt>
+            <dd>
+                <select formControlName="City">
+                    <option>Delhi</option>
+                    <option>Hyd</option>
+                </select>
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <h2>Upload Photo <button class="btn btn-link" (click)="AddPhoto()">Add More</button> </h2>
+        <div *ngFor="let control of newControls.controls; let i = index">
+          <div style="margin-top: 10px;">
+              <input type="file" formControlName="i">
+              <button class="btn btn-link" (click)="RemovePhoto(i)">Remove</button>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+	            "Angular Routing"
