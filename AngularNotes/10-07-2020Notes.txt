@@ -1,0 +1,65 @@
+		Angular Routing
+- Routing is a technique used in web application to configure User and SEO friendly URLs
+- User friendly URL allows user to access or query any content directly from URL.
+- SEO friendly URL allows Web Crawlers to identify the exact location within the resource.
+- Routing uses asynchronous technique using Ajax calls that allows to load new content into page without reloading the complete page.
+- In SPA application user can stay on one page and access everything from the page.
+- The library  "@angular/router" provides modules
+	a) RouterModule
+	b) Routes
+- Routes is used configure a set of routes for application.
+- RouterModule is used for loading routes into RouteTable.
+- A Router Module is requried in application that configures and loads the routes on startup.
+
+Syntax:
+	         "app-routing.module.ts"
+
+import { NgModule }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes : Routes = [ ];    // configured routes
+
+@NgModule({
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
+})
+
+export class AppRoutingModule { }
+
+- Routes is a collection of routes for your application, which comprises of several details like:
+
+ Router Property		Description
+==================================================
+ path		It is the request path used to access
+		any resource. Path is used in URL.
+
+ component	It refers the component to  be rendered
+		when path is requested.
+
+ redirectTo	It specfies the path for redirection 
+		dynamically.
+
+ pathMatch	It specifies the url to access when
+		requested path is similar to an existing
+		page.
+
+ children[]		It is a collection of child routes.
+
+- When a path is requested from URL the resulting component is rendered into startup component at a specific location, which is defined by using the directive:
+	<router-outlet> </router-outlet>
+
+- WildCard routes
+	{ path : '  ' }	→ Not requesting anything
+	{ path : '**' } 	→ Requested path not found
+
+
+
+Ex:
+1. Add following components
+	> ng g c shoppinghome
+	> ng g c electornics
+	> ng g c footwear
+	> ng g c fashion
+
+2. Goto "app" folder and add a new file
+		"app-router.module.ts"
