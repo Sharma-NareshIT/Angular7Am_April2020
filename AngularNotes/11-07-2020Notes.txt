@@ -1,0 +1,101 @@
+         Configuring Workspace for Angular Projects
+
+Angular Workspace allows to configure multiple projects.
+
+1. Open Command Prompt
+2. Create Workspace 
+
+    C:\>ng new my-workspace  --createApplication=false
+
+3. Change into Workspace
+  
+    C:\> cd my-workspace
+
+4. Create a new Application 
+ 
+    C:\my-workspace> ng  generate application  flipkart
+
+Workspace Config Files
+--------------------------------------------------------------------------------------
+.editorconfig
+.gitignore
+README.md
+angular.json
+package.json
+package-lock.json
+src
+node_modules
+tsconfig.json
+tsconfig.base.json
+tslint.json
+
+- Your application with in workspace are configured in a folder "Projects"
+		C:\my-workspace
+                                       |_node_modules
+		    |_Projects
+		       |_flipkart
+		          |_src
+		             |_app
+
+- To Start any specific application
+
+  C:\my-workspace> ng  serve  --project=flipkart
+
+- Generating Components, Services, Pipes, Modules
+    [always change to app folder to generate components, pipe, modules and services]
+
+  C:\my-workspace\projects\flipkart\src\app> ng g c home
+
+Ex: Routing
+1. Add following components into project
+	> ng g c home
+	> ng g c electronics
+	> ng g c footwear
+	> ng g c pagenotfound
+
+2. goto "app-routing.module.ts"
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './home/home.component';
+import { ElectornicsComponent } from './electornics/electornics.component';
+import { FootwearComponent } from './footwear/footwear.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
+
+const routes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'electronics', component: ElectornicsComponent},
+  {path: 'footwear', component: FootwearComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '**', component: PagenotfoundComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+3. goto "app.component.html"
+
+<div class="container">
+ <h2>Flipkart Shopping</h2>
+ <div class="btn-toolbar bg-danger">
+  <div class="btn-group">
+    <a routerLink="home" class="btn btn-danger">Home</a>
+    <a routerLink="electronics" class="btn btn-danger">Electronics</a>
+    <a routerLink="footwear" class="btn btn-danger">Footwear</a>
+  </div>
+ </div>
+ <div style="margin-top: 50px; height:350px">
+    <router-outlet></router-outlet>
+ </div>
+ <div class="bg-danger text-center">
+     &copy; copyright 2020
+ </div>
+</div>
+
+
+ 
