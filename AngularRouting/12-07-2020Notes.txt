@@ -1,0 +1,318 @@
+		Route Parameters
+- Web Application use Query String to transport data across components.
+	page ? name=value & name=value
+
+	shopping.html?category=electornics&subCategory=mobiles&model=samsung
+
+- When Routing is implemented your can configure route parameters instead or traditional querystring. Saft and easy to query any content from url.
+	page/value/value
+
+	shopping.html/electronics/mobiles/samsung
+
+- Angular router library provides "ActivatedRoute" module, which is responsible for configuring and accessing route parameters.
+
+- Parameters are Configured in route path - Which are formal parameters.
+	
+   { path : 'name/:param1/:param2', component: ComponentName }
+
+	2078 char length for querystring in url
+
+
+- Actual values into parameter are passed from url or from routerLink.
+
+  <a routerLink="name/val1/val2"> Click </a>
+
+	param1=val1
+	param2=val2
+
+- You can access and use the parameters in any component
+	
+	private  route: ActivatedRoute;
+
+	this.route.snapshot.paramMap.get('paramName');
+
+
+Ex:
+1. Add a new component by name search
+	> ng g c search --skipTests=true
+
+2.  Goto "app-routing.module.ts"
+
+{path: 'search/:id/:name/:price', component: SearchComponent},
+
+3. Goto "app.component.html" add another group in toolbar
+
+<div class="btn-group">
+    <a routerLink="search/1/mobile/12000" class="btn btn-danger">Search</a>
+</div>
+
+4. Goto search.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit {
+  public product;
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.product = {
+      id: this.route.snapshot.paramMap.get('id'),
+      name: this.route.snapshot.paramMap.get('name'),
+      price: this.route.snapshot.paramMap.get('price')
+    };
+  }
+
+}
+
+5. goto search.component.html
+
+<div class="container">
+ <h2>Flipkart Shopping</h2>
+ <div class="btn-toolbar bg-danger justify-content-between">
+  <div class="btn-group">
+    <a routerLink="home" class="btn btn-danger">Home</a>
+    <a routerLink="electronics" class="btn btn-danger">Electronics</a>
+    <a routerLink="footwear" class="btn btn-danger">Footwear</a>
+  </div>
+  <div class="btn-group">
+    <a routerLink="search/1/mobile/12000" class="btn btn-danger">Search</a>
+  </div>
+ </div>
+ <div style="margin-top: 50px; height:350px">
+    <router-outlet></router-outlet>
+ </div>
+ <div class="bg-danger text-center">
+     &copy; copyright 2020
+ </div>
+</div>
+
+Try in URL
+ http://localhost:4200/search/101/SamsungTV/340000.44
+
+
+Ex:
+1. Generate a new service
+    >ng g service data --skipTests=true
+
+	 data.service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+  constructor() { }
+  public GetCategories(){
+    return [
+      {CategoryId: 1, CategoryName: 'Electronics'},
+      {CategoryId: 2, CategoryName: 'Footwear'}
+    ];
+  }
+  public GetProducts(){
+    return [
+      {ProductId: 1, Name: 'JBL Speaker', Price: 45000.44, CategoryId: 1},
+      {ProductId: 2, Name: 'Earpods', Price: 5000.44, CategoryId: 1},
+      {ProductId: 3, Name: 'Nike Casuals', Price: 4000.44, CategoryId: 2},
+      {ProductId: 4, Name: 'Lee Cooper Boot', Price: 5000.44, CategoryId: 2},
+    ];
+  }
+}
+
+2. Register Service in "app.module.ts"
+
+providers: [DataService],
+
+3. Add following components
+	> ng g c categorieslist
+	> ng g c productslist
+
+4. categorieslist.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+
+@Component({
+  selector: 'app-categorieslist',
+  templateUrl: './categorieslist.component.html',
+  styleUrls: ['./categorieslist.component.css']
+})
+export class CategorieslistComponent implements OnInit {
+  public categories = [];
+  constructor(private data: DataService) { }
+
+  ngOnInit(): void {
+    this.categories = this.data.GetCategories();
+  }
+
+}
+
+5. categorieslist.component.html
+
+<h2>Categories List</h2>
+<ol>
+    <li *ngFor="let item of categories">
+        <a routerLink="{{item.CategoryId}}">{{item.CategoryName}}</a>
+    </li>
+</ol>	
+
+6. Goto app-routing.module.ts
+
+  {path: 'categories', component: CategorieslistComponent},
+  {path: 'categories/:id', component: ProductslistComponent},
+
+7. productslist.component.s
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../data.service';
+
+@Component({
+  selector: 'app-productslist',
+  templateUrl: './productslist.component.html',
+  styleUrls: ['./productslist.component.css']
+})
+export class ProductslistComponent implements OnInit {
+  public categoryId;
+  public products = [];
+  constructor(private route: ActivatedRoute, private data: DataService) { }
+
+  ngOnInit(): void {
+    this.categoryId = this.route.snapshot.paramMap.get('id');
+    this.products = this.data.GetProducts().filter(x=>x.CategoryId==this.categoryId);
+  }
+
+}
+
+8. productslist.component.html
+
+<h2>Products List</h2>
+<ol>
+    <li *ngFor="let item of products">
+        {{item.Name}}
+    </li>
+</ol>
+
+9. Goto "app.component.html" and add router link
+
+<a routerLink="categories" class="btn btn-danger">Browse Categories</a>
+
+	        Configure Child Routes
+- Child routes are used to defined navigation within the component.
+- It configures a route within the current route.
+- You can define by using "children" attribute
+
+Syntax:
+ const routes: Routes = [
+              {path:  'parent' , component: ParentComponent, 
+                         children: [
+	           {path:'child', component: ChildComponent}
+	        ]
+                ];
+- Redirection within component is configured by using "navigate()" of router module
+ 
+Syntax:
+      this.router.navigate(['path', param], { relativeTo: this.route })
+
+ relativeTo is used to define navigation within the context.
+
+10. Add a new component
+	> ng g c productdetails
+
+11. Goto app-routing.module.ts
+
+{path: 'categories/:id', component: ProductslistComponent, 
+       children: [
+         {path: 'details/:id', component: ProductdetailsComponent}
+       ]
+  },
+
+12. productslist.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../data.service';
+
+@Component({
+  selector: 'app-productslist',
+  templateUrl: './productslist.component.html',
+  styleUrls: ['./productslist.component.css']
+})
+export class ProductslistComponent implements OnInit {
+  public categoryId;
+  public products = [];
+  constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
+
+  ngOnInit(): void {
+    this.categoryId = this.route.snapshot.paramMap.get('id');
+    this.products = this.data.GetProducts().filter(x=>x.CategoryId==this.categoryId);
+  }
+  public GetDetails(item){
+      this.router.navigate(['details', item.ProductId], {relativeTo: this.route});
+  }
+}
+
+13. productslist.component.html
+
+<h2>Products List</h2>
+<div class="row">
+  <div class="col-4">
+    <ol>
+        <li *ngFor="let item of products">
+           <button (click)="GetDetails(item)" class="btn btn-link">
+             {{item.Name}}
+           </button>
+        </li>
+    </ol>
+  </div>
+  <div class="col-8">
+     <router-outlet></router-outlet>
+  </div>
+</div>
+
+14. goto productdetails.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-productdetails',
+  templateUrl: './productdetails.component.html',
+  styleUrls: ['./productdetails.component.css']
+})
+export class ProductdetailsComponent implements OnInit {
+
+  public productid;
+  public product = [];
+  constructor(private data: DataService, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.productid = this.route.snapshot.paramMap.get('id');
+    this.product = this.data.GetProducts().filter(x=>x.ProductId==this.productid);
+  }
+
+}
+
+15. productdetails.component.html
+
+<h3>Details</h3>
+<dl>
+    <dt>Product Id</dt>
+    <dd>{{product[0].ProductId}}</dd>
+    <dt>Name</dt>
+    <dd>{{product[0].Name}}</dd>
+    <dt>Price</dt>
+    <dd>{{product[0].Price}}</dd>
+</dl>
+		Server Side Integration
+- Node JS
+- Express
+- MongoDb
