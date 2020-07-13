@@ -1,0 +1,171 @@
+	          Consuming Data from API
+- JavaScript	: XmlHttpRequest  object
+- JQuery		: $.Ajax(), $.getJSON()
+- Angular Js	: $http()
+- Angular		: HttpClient module
+		  rxJS
+	
+	               MEAN Stack
+M	- MongoDb 	Database
+E	- Express		Middleware
+A	- Angular		Client Side
+N	- Node Js		Server Side
+
+		Data Layer
+		=========
+1. Install MongoDb 
+       https://www.mongodb.com/try/download/community
+       4.2 Current
+
+2. Start MongoDb  Server
+    - windows Run option
+    - services.msc
+    - Right Click on MongoDb Server → Start
+
+3. Start MongoDb Client
+    - Open command prompt
+    - Change to following location
+
+    C:\Program Files\MongoDB\Server\4.0\bin>
+
+    - type "mongo.exe"
+    - It will start the mongo client connecting to server
+
+	mongodb://127.0.0.1:27017
+
+	RDBMS		MongoDb
+	Database		Database
+	Table		Collection
+	Row		Document
+	Field		Field
+	Join		Embeded Document
+
+1. To View Database
+	> show dbs
+	
+2. To View Current Database
+	> db
+
+3. To Create a new Database or to switch into existing database
+	> use databaseName
+	> use northwinddb
+
+4. Create Tables [Collections] and Add into Database
+
+	>db.createCollection("tblName")
+	>db.createCollection("tblproducts")
+
+	>show collections [views tables list]
+	
+5. Add Records into Table
+    [Documents into Collection]
+
+   	>db.collectionName.insert({ })
+	>db.collectionName.insert([{ }, { }])
+
+Ex: single
+ db.tblproducts.insert({Name:"Samsung TV", Price: 34000.44})
+  
+Ex:multiple
+db.tblproducts.insert([{Name:"Mobile", Price:12000.33}, {Name: "Nike Casuals", Price:5000.55},{Name:"Lee Cooper Boot", Price: 4600.55}])
+
+6. View Document from collection
+	>db.collectionName.find().pretty()
+	>db.tblproducts.find().pretty()
+
+                Server Side Application with Middleware
+	              [Node JS with Express]
+                ------------------------------------------------------------
+1. Create a new folder in your workspace by name
+	"ServerSideApp"
+
+2. Open in command prompt
+
+3. Install following packages
+
+> npm install mongodb	- lib for mongo client
+> npm install express	- lib for middleware
+> npm install body-parser	- lib for converting into JSON
+			  CORS settings.
+
+4. Create BusinessLayer - Logic to handle communication between Application and Database
+
+5. Add Node JS Program - JavaScript File
+	       "businesslayer.js"
+
+//import library
+var mongoclient = require("mongodb").MongoClient;
+var express = require("express");
+var bodyParser = require("body-parser");
+
+//Configure connection string
+var url = "mongodb://127.0.0.1:27017";
+
+//Configure middleware
+var app = express();
+app.use(bodyParser.urlencoded({
+    extended:true
+}))
+app.use(bodyParser.json());
+
+//CORS [Cross Origin Resource Sharing]
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Acess-Control-Allow-Header","Origin, x-Requested-with, Content-Type, Accept");
+    res.header("Access-Control-Allow-Method","GET","POST","PUT");
+    next();
+})
+//Create API Requests
+app.get("/getproducts", function(req, res){
+    mongoclient.connect(url, function(err, client){
+        if(!err){
+           var database = client.db("northwinddb");
+           database.collection("tblproducts").find({}).toArray(function(err, documents){
+                 if(!err){
+                     res.send(documents);
+                 } else {
+                     console.log(err);
+                 }
+           })
+        } else {
+            console.log(err);
+        }
+    })
+})
+app.post("/addproducts", function(req, res){
+    mongoclient.connect(url, function(err, client){
+        if(!err) {
+            var database = client.db("northwinddb");
+            var data = {
+                Name: req.body.Name,
+                Price: req.body.Price
+            };
+            database.collection("tblproducts").insert(data, function(err, result){
+                if(!err){
+                    console.log("Record Inserted");
+                } else{
+                    console.log(err);
+                }
+            })
+        }
+    })
+})
+app.listen(8080);
+console.log("Server Started : http://127.0.0.1:8080");
+
+
+api requests		purpose
+--------------------------------------------------------------------------------------
+http://127.0.0.1:8080/getproducts    returns all products
+http://127.0.0.1:8080/addproducts   inserts a new product
+
+HttpClient
+RxJS
+
+
+
+
+
+
+
+
